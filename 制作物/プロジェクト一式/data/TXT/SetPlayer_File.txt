@@ -1,0 +1,99 @@
+#==============================================================================
+#
+# xファイルを読み込む [SetModel_File.txt]
+# Author : kida ibuki
+#
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# モデルファイル名
+#------------------------------------------------------------------------------
+MODEL_FILENAME = data/MODEL/PLAYER/00_bodyB.x		    # [0]体後ろ
+MODEL_FILENAME = data/MODEL/PLAYER/01_bodyF.x			# [1]体前
+MODEL_FILENAME = data/MODEL/PLAYER/02_leftWingU1.x		# [2]左上羽
+MODEL_FILENAME = data/MODEL/PLAYER/03_leftWingU2.x		# [3]左上先端
+MODEL_FILENAME = data/MODEL/PLAYER/04_leftWingD1.x		# [4]左下羽
+MODEL_FILENAME = data/MODEL/PLAYER/05_leftWingD2.x		# [5]左下先端
+MODEL_FILENAME = data/MODEL/PLAYER/06_rightWingD1.x		# [6]右下羽
+MODEL_FILENAME = data/MODEL/PLAYER/07_rightWingD2.x		# [7]右下先端
+MODEL_FILENAME = data/MODEL/PLAYER/08_rightWingU1.x		# [8]右下羽
+MODEL_FILENAME = data/MODEL/PLAYER/09_rightWingU2.x		# [9]右下先端
+
+#------------------------------------------------------------------------------
+# キャラクター情報
+#------------------------------------------------------------------------------
+CHARACTERSET
+	NUM_PARTS = 10					# パーツ数
+
+	PARTSSET
+		INDEX = 0					# 体
+		PARENT = -1					# (親)NULL
+		POS = 0.0 10.0 0.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 1					# 頭
+		PARENT = 0					# (親)体
+		POS = 0.0 0.0 -26.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 2					# 右腕
+		PARENT = 0					# (親)体
+		POS = 9.0 2.0 -4.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 3					# 右手
+		PARENT = 2					# (親)右腕
+		POS = 22.0 6.0 0.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 4					# 左腕
+		PARENT = 0					# (親)体
+		POS = 9.0 -2.0 -4.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 5					# 左手
+		PARENT = 4					# (親)左腕
+		POS = 22.0 -6.0 0.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 6					# 右腿
+		PARENT = 0					# (親)体
+		POS = -9.0 -2.0 -4.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 7					# 右足
+		PARENT = 6					# (親)右腿
+		POS = -22.0 -6.0 0.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 8					# 左腿
+		PARENT = 0					# (親)体
+		POS = -9.0 2.0 -4.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	PARTSSET
+		INDEX = 9					# 左足
+		PARENT = 8					# (親)左腿
+		POS = -22.0 6.0 0.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
+	
+END_CHARACTERSET

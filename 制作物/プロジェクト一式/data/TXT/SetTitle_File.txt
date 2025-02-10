@@ -1,0 +1,794 @@
+#==============================================================================
+#
+# xファイルを読み込む [SetModel_File.txt]
+# Author : kida ibuki     
+#
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# モデルファイル名
+#------------------------------------------------------------------------------
+NUM_MODEL = 3      モデルの種類(数)
+
+MODEL_FILENAME = data/MODEL/TITLE/titlewall_left.x		#[0]左壁
+MODEL_FILENAME = data/MODEL/TITLE/titlewall_right.x		#[1]右壁
+MODEL_FILENAME = data/MODEL/TITLE/title_floor.x		#[2]上下用
+
+#------------------------------------------------------------------------------
+# オブジェクト情報
+#------------------------------------------------------------------------------
+OBJECTSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 0.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 810.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 1620.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 2430.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 3240.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 4050.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 4860.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 5670.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 0
+		POS = -340.0 -140.0 6480.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+
+
+#=====================================================================
+# 右壁
+#=====================================================================
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 0.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 810.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 1620.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 2430.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 3240.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 4050.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 4860.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 5670.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 1
+		POS = 340.0 -140.0 6480.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+
+#=====================================================================
+# 床
+#=====================================================================
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 0.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 0.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 810.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 810.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 1620.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 1620.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 2430.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 2430.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 3240.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 3240.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 4050.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 4050.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 4860.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 4860.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 5670.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 5670.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 -140.0 6480.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 -140.0 6480.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+
+#=====================================================================
+# 屋根
+#=====================================================================
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 0.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 0.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 810.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 810.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 1620.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 1620.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 2430.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 2430.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 3240.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 3240.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 4050.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 4050.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 4860.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 4860.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 5670.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 5670.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = -170.0 280.0 6480.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+	MODELSET
+		TYPE = 2
+		POS = 160.0 280.0 6480.0  
+		ROT = 0.0 0.0 0.0 
+		MOVERIGHT = 0.0 0.0 0.0		#右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0       #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_MODELSET
+
+
+END_OBJECTSET

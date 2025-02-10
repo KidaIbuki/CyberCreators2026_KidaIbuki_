@@ -1,0 +1,39 @@
+﻿  background.cpp
+  billboard.cpp
+  blockX.cpp
+  bullet.cpp
+  camera.cpp
+  effect.cpp
+  enemyX.cpp
+  explosion.cpp
+  fade.cpp
+  fog.cpp
+  game.cpp
+C:\Users\student\Desktop\SkywardAssault\code\game.cpp(284,5): warning C4456: 'nPriority' を宣言すると、以前のローカル宣言が隠蔽されます
+C:\Users\student\Desktop\SkywardAssault\code\game.cpp(217,11): message : 'nPriority' の宣言を確認してください
+  life.cpp
+  light.cpp
+  line.cpp
+  main.cpp
+C:\Users\student\Desktop\SkywardAssault\code\main.cpp(17,92): warning C4100: 'lpCmdLine': 引数は関数の本体部で 1 度も参照されません。
+C:\Users\student\Desktop\SkywardAssault\code\main.cpp(17,65): warning C4100: 'hInstancePrev': 引数は関数の本体部で 1 度も参照されません。
+  manager.cpp
+  modelparts.cpp
+  motion.cpp
+  object.cpp
+  object2D.cpp
+  コードを生成中...
+  コンパイル中...
+  object3D.cpp
+  objectX.cpp
+  pause_select.cpp
+  playerM.cpp
+  renderer.cpp
+  result.cpp
+  scene.cpp
+  sound.cpp
+  target.cpp
+  title.cpp
+  ui.cpp
+  コードを生成中...
+  SkywardAssault.vcxproj -> C:\Users\student\Desktop\SkywardAssault\SkywardAssault.exe

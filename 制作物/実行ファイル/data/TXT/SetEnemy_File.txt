@@ -1,0 +1,258 @@
+#==============================================================================
+#
+# 敵のxファイルを読み込む [SetEnemy_File.txt]
+# Author : kida ibuki 
+#
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# モデルファイル名
+#------------------------------------------------------------------------------
+NUM_ENEMY = 3      モデルの種類(数)
+
+ENEMY_FILENAME = data/MODEL/ENEMY/EnemyNormal01.x	#[0]
+ENEMY_FILENAME = data/MODEL/ENEMY/EnemyNormal02.x   #[1]
+ENEMY_FILENAME = data/MODEL/ENEMY/EnemyNormal03.x   #[2]
+
+#------------------------------------------------------------------------------
+# オブジェクト情報
+#------------------------------------------------------------------------------
+MODEL_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 0
+		POS = 0.0 20.0 350.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 100.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -100.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 20.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -20.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 0
+		POS = 0.0 60.0 1350.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 100.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -100.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 20.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -20.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.8                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 0
+		POS = 0.0 60.0 2250.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 80.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -100.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 40.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -20.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.5                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 0
+		POS = 0.0 20.0 2600.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 100.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -80.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 20.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -20.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.5                   #x軸方向の速度
+		SPEED_Y = 0.3                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 0
+		POS = 40.0 40.0 4300.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 40.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -80.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 40.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -20.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.5                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 0
+		POS = 20.0 20.0 4650.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 20.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -60.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 40.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.4                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 0
+		POS = 20.0 60.0 6350.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 20.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -60.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 40.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.7                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+		ENEMY_MODELSET
+		TYPE = 0
+		POS = 0.0 0.0 6750.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 120.0 0.0 0.0		   #右にどれくらい動くか
+		MOVELEFT = -60.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 40.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -20.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.7                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+#------------------------------------------------------------------------------
+# type 1の敵
+#------------------------------------------------------------------------------
+
+	ENEMY_MODELSET
+		TYPE = 1
+		POS = 50.0 20.0 700.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 100.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -100.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 1
+		POS = -50.0 20.0 1650.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 100.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -100.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 1
+		POS = 0.0 40.0 3350.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 100.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -100.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.6                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 1
+		POS = -20.0 -20.0 3700.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 100.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -80.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.5                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 1
+		POS = 40.0 40.0 5100.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = 0.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 80.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 -40.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.0                   #x軸方向の速度
+		SPEED_Y = 0.7                   #y軸方向の速度
+	END_ENEMYSET
+
+#------------------------------------------------------------------------------
+# type 2の敵
+#------------------------------------------------------------------------------
+	ENEMY_MODELSET
+		TYPE = 2
+		POS = 150.0 40.0 1000.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 120.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = -120.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.5                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 2
+		POS = 80.0 40.0 1900.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 100.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = -140.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.5                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 2
+		POS = 80.0 60.0 3000.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 80.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = -120.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.6                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 2
+		POS = 0.0 -60.0 4050.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = -80.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.4                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 2
+		POS = 40.0 0.0 5450.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 40.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = -80.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.6                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_ENEMYSET
+
+	ENEMY_MODELSET
+		TYPE = 2
+		POS = 0.0 40.0 5900.0  
+		ROT = 0.0 0.0 0.0     
+		MOVERIGHT = 0.0 0.0 0.0        #右にどれくらい動くか
+		MOVELEFT = -80.0 0.0 0.0         #左にどれくらい動くか
+		MOVEUP = 0.0 0.0 0.0            #上にどれくらい動くか
+		MOVEDOWN = 0.0 0.0 0.0          #下にどれくらい動くか
+		SPEED_X = 0.4                   #x軸方向の速度
+		SPEED_Y = 0.0                   #y軸方向の速度
+	END_ENEMYSET
+
+
+END_MODEL_ENEMYSET
