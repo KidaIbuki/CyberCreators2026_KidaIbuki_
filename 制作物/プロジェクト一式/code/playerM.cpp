@@ -28,6 +28,20 @@ const int CPlayerM::OVER_UP = 200;  // 上
 const int CPlayerM::OVER_DOWN = 100;  // 下
 const int CPlayerM::FRAMECNT = 40;   // フレームのカウント(弾の発射間隔を変えれる)
 
+const D3DXCOLOR CPlayerM::COL = D3DXCOLOR(1.0f, 0.5f, 0.0f, 0.5f);   // エフェクトカラー
+const float CPlayerM::RADIUS = 3.0f;   // 半径
+const float CPlayerM::SPLIT = 1.0f;    // 分割
+const int CPlayerM::EFFECTLIFE = 5;   // エフェクトライフ
+
+const float CPlayerM::MOVE_PALYER = 4.0f;   // プレイヤーの移動量
+const float CPlayerM::MOVE_PALYER_Z = 2.0f;   // プレイヤーの死んだときの移動量
+const float CPlayerM::MOVE_PALYER_Y = 1.0f;   // プレイヤーの死んだときの移動量
+
+const int CPlayerM::SHAKE_FRAME = 30;   // 画面の揺れのフレーム
+const int CPlayerM::SHAKE_VOLUME_DEATH = 3;   // 死んだとときの揺れの強さ
+const int CPlayerM::SHAKE_VOLUME = 10;   // ダメージを受けたときの揺れの強さ
+const int CPlayerM::LIFE_REDUCE = 10;   // ライフを減らす数
+
 //===============================
 // コンストラクタ
 //===============================
@@ -94,17 +108,17 @@ void CPlayerM::Update()
 		rot += m_rotMove;
 
 		//奥に動かす。
-		pos.z += 4.0f;
+		pos.z += MOVE_PALYER;
 
-		CEffect::Create(D3DXVECTOR3(pos.x, pos.y, pos.z - 25.0f), D3DXCOLOR(1.0f, 0.5f, 0.0f, 0.5f), 0, 3.0f, 1.0f, 0.0f, 5);
+		CEffect::Create(D3DXVECTOR3(pos.x, pos.y, pos.z - 25.0f), COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);
 
 
 	}
 	if (m_bPlayerDeath == true)
 	{
-		pos.y -= 1.0f;
-		pos.z += 2.0f;
-		pManager->GetInstance()->GetCamera()->SetShake(30, 3);   // 画面の揺れ
+		pos.y -= MOVE_PALYER_Y;
+		pos.z += MOVE_PALYER_Z;
+		pManager->GetInstance()->GetCamera()->SetShake(SHAKE_FRAME, SHAKE_VOLUME_DEATH);   // 画面の揺れ
 
 		m_nDeathCnt--;
 		if (m_nDeathCnt <= 0)
@@ -414,8 +428,8 @@ void CPlayerM::Collision()
 				// 衝突判定
 				if (obb1.CheckOverlap(obb2))
 				{// 当たってるとき
-					pManager->GetInstance()->GetCamera()->SetShake(30, 10);   // 画面の揺れ
-					CLife::SubLife(10);
+					pManager->GetInstance()->GetCamera()->SetShake(SHAKE_FRAME, SHAKE_VOLUME);   // 画面の揺れ
+					CLife::SubLife(LIFE_REDUCE);
 					// サウンドを流す
 					pManager->GetSound()->PlaySoundA(CSound::SOUND_LABEL::SOUND_LABEL_SE_DAMAGE);
 				}
@@ -443,8 +457,8 @@ void CPlayerM::Collision()
 				// 衝突判定
 				if (obb1.CheckOverlap(obb2))
 				{// 当たってるとき
-					pManager->GetInstance()->GetCamera()->SetShake(30, 10);   // 画面の揺れ
-					CLife::SubLife(10);
+					pManager->GetInstance()->GetCamera()->SetShake(SHAKE_FRAME, SHAKE_VOLUME);   // 画面の揺れ
+					CLife::SubLife(LIFE_REDUCE);
 					// サウンドを流す
 					pManager->GetSound()->PlaySoundA(CSound::SOUND_LABEL::SOUND_LABEL_SE_DAMAGE);
 				}
@@ -472,8 +486,8 @@ void CPlayerM::Collision()
 				// 衝突判定
 				if (obb1.CheckOverlap(obb2))
 				{// 当たってるとき
-					pManager->GetInstance()->GetCamera()->SetShake(30, 10);   // 画面の揺れ
-					CLife::SubLife(10);
+					pManager->GetInstance()->GetCamera()->SetShake(SHAKE_FRAME, SHAKE_VOLUME);   // 画面の揺れ
+					CLife::SubLife(LIFE_REDUCE);
 					// サウンドを流す
 					pManager->GetSound()->PlaySoundA(CSound::SOUND_LABEL::SOUND_LABEL_SE_DAMAGE);
 				}

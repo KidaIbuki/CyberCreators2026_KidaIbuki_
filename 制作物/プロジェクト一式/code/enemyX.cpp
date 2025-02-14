@@ -171,26 +171,6 @@ void CEnemyX::Draw()
 {
 
 	CObjectX::Draw();
-#if 0
-	CManager* pManager = CManager::GetInstance();
-	LPDIRECT3DDEVICE9 pDevice = pManager->GetRenderer()->GetDevice();		// デバイスを取得
-
-	D3DXCreateLine(pDevice, &m_pLine);
-
-	// OBB初期化
-	D3DXVECTOR3 center(m_pos.x, m_pos.y, m_pos.z), halfWidths(m_size.x, m_size.y, m_size.z);
-	D3DXMATRIX rotation;
-	D3DXMatrixRotationYawPitchRoll(&rotation, D3DXToRadian(45), 0, 0); // Y軸を中心に45度回転	OBB obb(center, halfWidths, rotation);
-	OBB obb(center, halfWidths, rotation);
-
-
-	 //OBBを描画
-	DrawOBB(m_pLine, obb, pDevice, D3DCOLOR_XRGB(255, 0, 0));
-
-
-	m_pLine->Release();
-    // TODO : ラインはまだバグがあるから要修正
-#endif
 }
 //==================================
 // 生成処理

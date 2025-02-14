@@ -10,15 +10,33 @@
 float CUi::m_fTexHeight = 0;
 float CUi::m_fTexWidht = 0;
 int CUi::m_nFrame = 0;
+
+const int CUi::FRAME = 3;
+const float CUi::REDUCE_POS = 0.25f;
+const float CUi::INITIAL_VALUE = 0.25f;
+const float CUi::TEX_RANGE = 1.25f;
+
+const float CUi::TEX_SIZE_X_1 = 120.0f;
+const float CUi::TEX_SIZE_Y_1 = 50.0f;
+
+const float CUi::TEX_SIZE_X_2 = 450.0f;
+const float CUi::TEX_SIZE_Y_2 = 250.0f;
+
+const float CUi::TEX_SIZE_X_3 = 100.0f;
+const float CUi::TEX_SIZE_Y_3 = 100.0f;
+
+const float CUi::TEX_SIZE_X_4 = 500.0f;
+const float CUi::TEX_SIZE_Y_4 = 300.0f;
+
 //====================================
 // コンストラクタ
 //====================================
 CUi::CUi()
 {
 	m_nType = 0;
-	m_nFrame = 3;
+	m_nFrame = FRAME;
 	m_fTexHeight = 0.0f;   //縦
-	m_fTexWidht = 0.25f;    //横
+	m_fTexWidht = INITIAL_VALUE;    //横
 
 }
 //====================================
@@ -36,38 +54,39 @@ HRESULT CUi::Init()
 
 	SetType(CObject::TYPE::UI);
 
+	// 各テクスチャの設定
 	if (m_nType == 0)
 	{
-		SetSize(120.0f, 50.0f);
+		SetSize(TEX_SIZE_X_1, TEX_SIZE_Y_1);
 		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	else if (m_nType == 1)
 	{
-		SetSize(450.0f, 250.0f);
-		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		SetSize(TEX_SIZE_X_2, TEX_SIZE_Y_2);
+		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	else if (m_nType == 2)
 	{
-		SetSize(450.0f, 250.0f);
+		SetSize(TEX_SIZE_X_2, TEX_SIZE_Y_2);
 		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	else if (m_nType == 3)
 	{
-		SetSize(450.0f, 250.0f);
+		SetSize(TEX_SIZE_X_2, TEX_SIZE_Y_2);
 		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	else if (m_nType == 4)
 	{
-		SetSize(450.0f, 250.0f);
+		SetSize(TEX_SIZE_X_2, TEX_SIZE_Y_2);
 		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	else if (m_nType == 5)
 	{
-		SetSize(100.0f, 100.0f);
+		SetSize(TEX_SIZE_X_3, TEX_SIZE_Y_3);
 	}
 	else if (m_nType == 6)
 	{
-		SetSize(500.0f, 300.0f);
+		SetSize(TEX_SIZE_X_4, TEX_SIZE_Y_4);
 		SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
@@ -102,7 +121,7 @@ void CUi::Update()
 		//頂点バッファのアンロック
 		m_pVtxBuff->Unlock();
 
-		if (m_fTexHeight == 1.0f && m_fTexWidht == 1.25f)
+		if (m_fTexHeight == 1.0f && m_fTexWidht == TEX_RANGE)
 		{
 			CUi::DeathFlag();
 			CPlayerM::MoveFlag(true);
@@ -164,9 +183,9 @@ void CUi::SubTime()
 	}
 	if (m_nFrame <= 0)
 	{
-		m_fTexHeight += 0.25f;   //縦
-		m_fTexWidht += 0.25f;    //横
+		m_fTexHeight += REDUCE_POS;   //縦
+		m_fTexWidht += REDUCE_POS;    //横
 
-		m_nFrame = 3;
+		m_nFrame = FRAME;
 	}
 }

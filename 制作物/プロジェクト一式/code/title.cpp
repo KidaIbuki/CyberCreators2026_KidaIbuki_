@@ -12,12 +12,24 @@
 #include "playerM.h"  // プレイヤー
 #include "target.h"   // レティクル
 #include "ui.h"       // UI
+
+const float CTitle::UI_POS_X = 300.0f;  // UI位置
+const float CTitle::UI_POS_Y = 150.0f;
+const int CTitle::TIMECNT = 40;  // タイムのカウント
+
+
+const int CTitleSecond::TIMECNT_2 = 40;  // タイムのカウント
+
+const float CTitleSecond::TARGET_POS_Z = 150.0f;
+const float CTitleSecond::UI_POS_X_2 = 640.0f;  // UI位置
+const float CTitleSecond::UI_POS_Y_2 = 100.0f;
+
 //====================================
 // コンストラクタ
 //====================================
 CTitle::CTitle()
 {
-	m_nTimerCnt = 40;
+	m_nTimerCnt = TIMECNT;
 }
 //====================================
 // デストラクタ
@@ -33,10 +45,8 @@ HRESULT CTitle::Init()
 	CManager* pManager = CManager::GetInstance();
 
 	CScene::Init();
-	//SetSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	//SetPos(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
-	CUi::Create(D3DXVECTOR2(300.0f, 150.0f), 6);   // UI
+	CUi::Create(D3DXVECTOR2(UI_POS_X, UI_POS_Y), 6);   // UI
 
 	SetModel_File_Title();
 
@@ -114,7 +124,7 @@ void CTitle::Update()
 		if (pKeyboard->GetTrigger(DIK_RETURN) || pJoypad->GetJoypadTrigger(pJoypad->JOYKEY_START))
 		{
 			CFade::SetFade(CScene::MODE::MODE_TITLE2);
-			m_nTimerCnt = 40;
+			m_nTimerCnt = TIMECNT;
 		}
 	}
 }
@@ -132,7 +142,6 @@ CTitle* CTitle::Create()
 {
 	CTitle* pTitle = new CTitle();
 	pTitle->Init();
-	//pTitle->SetTexture("data/TEXTURE/titleTest.png");
 
 	return pTitle;
 }
@@ -141,7 +150,7 @@ CTitle* CTitle::Create()
 //====================================
 CTitleSecond::CTitleSecond()
 {
-	m_nTimerCnt = 40;
+	m_nTimerCnt = TIMECNT_2;
 	m_Position = POSITION_NONE;
 	m_nFrame = 0;
 
@@ -165,7 +174,7 @@ HRESULT CTitleSecond::Init()
 
 	// チュートリアル用のプレイヤーとレティクル
 	CPlayerM* pPlayer = CPlayerM::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, D3DX_PI * 1.0f, 0.0f));
-	CTarget* pTarget = CTarget::Create(D3DXVECTOR3(0.0f, 0.0f, 150.0f));
+	CTarget* pTarget = CTarget::Create(D3DXVECTOR3(0.0f, 0.0f, TARGET_POS_Z));
 	pPlayer->MoveFlag(true);
 	// オブジェクトの保存
 	CreateSaveObject(pPlayer);
@@ -282,28 +291,28 @@ void CTitleSecond::Update()
 		m_nFrame--;
 		if (m_nFrame <= 0)
 		{
-			CUi::Create(D3DXVECTOR2(640.0f, 100.0f), 1);
+			CUi::Create(D3DXVECTOR2(UI_POS_X_2, UI_POS_Y_2), 1);
 		}
 		break;
 	case POSITION_2:
 		m_nFrame--;
 		if (m_nFrame <= 0)
 		{
-			CUi::Create(D3DXVECTOR2(640.0f, 100.0f), 2);
+			CUi::Create(D3DXVECTOR2(UI_POS_X_2, UI_POS_Y_2), 2);
 		}
 		break;
 	case POSITION_3:
 		m_nFrame--;
 		if (m_nFrame <= 0)
 		{
-			CUi::Create(D3DXVECTOR2(640.0f, 100.0f), 3);
+			CUi::Create(D3DXVECTOR2(UI_POS_X_2, UI_POS_Y_2), 3);
 		}
 		break;
 	case POSITION_4:
 		m_nFrame--;
 		if (m_nFrame <= 0)
 		{
-			CUi::Create(D3DXVECTOR2(640.0f, 100.0f), 4);
+			CUi::Create(D3DXVECTOR2(UI_POS_X_2, UI_POS_Y_2), 4);
 		}
 		break;
 	}
@@ -322,7 +331,7 @@ void CTitleSecond::Update()
 		if (pKeyboard->GetTrigger(DIK_RETURN) || pJoypad->GetJoypadTrigger(pJoypad->JOYKEY_START))
 		{
 			CFade::SetFade(CScene::MODE::MODE_GAME);
-			m_nTimerCnt = 40;
+			m_nTimerCnt = TIMECNT_2;
 		}
 	}
 }

@@ -312,12 +312,6 @@ void CObjectX::SetModel(std::string sPath)
 		&m_dwNumMat,
 		&m_pMesh);
 
-	
-	if (m_pBuffMat == nullptr)
-	{// “Ç‚İ‚ß‚È‚©‚Á‚½‚ç
-		Beep(1200, 300);
-	}
-
 	SizeVtx();	// pMesh‚Ìî•ñ‚ğæ“¾
 }
 
@@ -328,19 +322,4 @@ void CObjectX::SetSize(float fWidth, float fHeight, float fDepth)
 {
 	m_size = D3DXVECTOR3(fWidth, fHeight, fDepth);
 }
-
-//void CObjectX::SetCreate(const char* filepath)
-//{
-//	// Xƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
-//	D3DXLoadMeshFromX(sPath.c_str(),
-//		D3DXMESH_SYSTEMMEM,
-//		pDevice,
-//		NULL,
-//		&m_pBuffMat,
-//		NULL,
-//		&m_dwNumMat,
-//		&m_pMesh);
-//
-//
-//}
 

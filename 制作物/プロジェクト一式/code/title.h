@@ -53,6 +53,11 @@ private:
     void SetModel_File_Title();
     MODEL_FILENAME m_gModelData[NUM_OBJECT_NUM];
 
+    // UIの位置
+    static const float UI_POS_X;
+    static const float UI_POS_Y;
+    static const int TIMECNT;
+
 };
 
 class CTitleSecond :public CTitle
@@ -95,6 +100,13 @@ private:
 
     POSITION m_Position;
     int m_nFrame;       // ボス出現のフレーム
+
+    static const int TIMECNT_2;
+    static const float TARGET_POS_Z;
+    static const float UI_POS_X_2;
+    static const float UI_POS_Y_2;
+
+
 
 };
 

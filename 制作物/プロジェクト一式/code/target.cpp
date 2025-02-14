@@ -10,9 +10,25 @@
 #include "playerM.h"  // プレイヤー
 #include "manager.h"    // マネージャー
 #include "ui.h"
-const int CTarget::OVER = 280;
-const int CTarget::OVER_UP = 110;
-const int CTarget::OVER_DOWN = 100;
+const float CTarget::LEFT = 250.0f;  // 各方向の移動の最大値
+const float CTarget::RIGHT = 250.0f;
+const float CTarget::UP = 100.0f;
+const float CTarget::DOWN = 170.0f;
+
+const float CTarget::BILLSIZE_X = 20.0f;   // 各ビルボードサイズ
+const float CTarget::BILLSIZE_Y = 40.0f;
+const float CTarget::BILLSIZE_Z = 20.0f;
+
+// カラーのマクロ
+const D3DXCOLOR CTarget::INIT_COLOR = D3DXCOLOR(0.0f, 0.5f, 0.2f, 1.0f);
+const D3DXCOLOR CTarget::CHANGE_COLOR = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
+const D3DXCOLOR CTarget::CHANGE_COLOR_ELSE = D3DXCOLOR(0.0f, 0.5f, 0.2f, 1.0f);
+
+// スティックの移動量
+const float CTarget::STICK_MOVE_X = 0.0001f;
+const float CTarget::STICK_MOVE_Y = 0.0001f;
+
+const float CTarget::POS_DISTANS = 150.0f;  // posからどれくらい離すか
 
 //==========================================
 // コンストラクタ
@@ -35,8 +51,8 @@ HRESULT CTarget::Init()
 {
 	CBillboard::Init();
 	SetType(CObject::TYPE::TARGET);
-	SetBillboard(20.0f, 40.0f, 20.0f);
-	SetColor(D3DXCOLOR(0.0f, 0.5f, 0.2f, 1.0f));
+	SetBillboard(BILLSIZE_X, BILLSIZE_Y, BILLSIZE_Z);
+	SetColor(INIT_COLOR);
 
 	return S_OK;
 }
@@ -76,14 +92,14 @@ void CTarget::Update()
 					if (pPlayer != nullptr)
 					{
 						MoveTatget();
-						this->m_pos.z = playerPos.z + 150.0f;  // レティクルをプレイヤーの移動に合わして移動させる
+						this->m_pos.z = playerPos.z + POS_DISTANS;  // レティクルをプレイヤーの移動に合わして移動させる
 					}
 				}
 				// ボス戦の範囲内だったら
 				else if (playerPos.z >= POSITION1)
 				{
 					this->m_pos = playerPos;
-					this->m_pos.z = playerPos.z + 150.0f;  
+					this->m_pos.z = playerPos.z + POS_DISTANS;
 				}
 			}
 			pObj = pNext; // オブジェクトのポインタを次に進める
@@ -98,34 +114,34 @@ void CTarget::Update()
 	D3DXVECTOR3 posR = pCamera->GetPosR();	//向き
 
     // 左
-	if (m_pos.x < posR.x - 250.0f)
+	if (m_pos.x < posR.x - LEFT)
 	{
-		m_pos.x = posR.x - 250.0f;
+		m_pos.x = posR.x - LEFT;
 	}
 	//右
-	if (m_pos.x > posR.x + 250.0f)
+	if (m_pos.x > posR.x + RIGHT)
 	{
-		m_pos.x = posR.x + 250.0f;
+		m_pos.x = posR.x + RIGHT;
 	}
 	//下
-	if (m_pos.y < posR.y - 170.0f)
+	if (m_pos.y < posR.y - DOWN)
 	{
-		m_pos.y = posR.y - 170.0f;
+		m_pos.y = posR.y - DOWN;
 	}
 	// 上
-	if (m_pos.y > posR.y + 100.0f)
+	if (m_pos.y > posR.y + UP)
 	{
-		m_pos.y = posR.y + 100.0f;
+		m_pos.y = posR.y + UP;
 	}
 
 	// 当たり判定の範囲内にいたら色を変える
 	if (m_bColor == true)
 	{
-		SetColor(D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f));
+		SetColor(CHANGE_COLOR);
 	}
 	else
 	{
-		SetColor(D3DXCOLOR(0.0f, 0.5f, 0.2f, 1.0f));
+		SetColor(CHANGE_COLOR_ELSE);
 	}
 }
 //==========================================
@@ -165,8 +181,8 @@ void CTarget::MoveTatget()
 	if (pJoypad->GetJoyR() == true)
 	{
 		XINPUT_STATE stick = pJoypad->GetStickR();   // 右スティックの情報を取得
-		this->m_pos.x += stick.Gamepad.sThumbRX * 0.0001f;   // x軸移動
-		this->m_pos.y += stick.Gamepad.sThumbRY * 0.0001f;   // y軸移動
+		this->m_pos.x += stick.Gamepad.sThumbRX * STICK_MOVE_X;   // x軸移動
+		this->m_pos.y += stick.Gamepad.sThumbRY * STICK_MOVE_Y;   // y軸移動
 	}
 
 
@@ -202,7 +218,7 @@ void CTarget::CollisionTarget()
 
 				D3DXMATRIX rotation1, rotation2;
 				D3DXMatrixIdentity(&rotation1); // 回転なし
-				D3DXMatrixRotationY(&rotation2, D3DXToRadian(45)); // 45度回転
+				D3DXMatrixIdentity(&rotation2); // 回転なし
 
 				OBB obb1(center1, halfWidths1, rotation1);
 				OBB obb2(center2, halfWidths2, rotation2);

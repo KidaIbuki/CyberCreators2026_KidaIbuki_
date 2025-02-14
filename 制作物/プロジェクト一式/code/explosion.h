@@ -29,9 +29,12 @@ private:
 	D3DXCOLOR m_col;     // カラー
 	int m_nLife;         // ライフ
 	DWORD m_dwLifeTime;    // ライフのタイマー
-	static const int LIFE;				//ライフ
 	static LPDIRECT3DTEXTURE9 m_pTextureTemp;						//テクスチャのテンプレート
-
+	static const int LIFE;				//ライフ
+	static const int DIVIDE;   // アニメーションの分割数
+	static const int TIME;     // アニメーションのタイプ
+	static const float SIZE_X;   // テクスチャサイズ
+	static const float SIZE_Z;   // テクスチャサイズ
 };
 
 

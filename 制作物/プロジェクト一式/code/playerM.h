@@ -46,15 +46,6 @@ public:
 	void Collision();         // プレイヤーの当たり判定
 	static void MoveFlag(bool bMove) { m_bMove = bMove; }
 	static void DeathMove(bool bDeath) { m_bPlayerDeath = bDeath; }
-	//**=================c++版マクロ====================**
-	static const float HALF2;				//3.14の半分の２等分
-	static const float HALF1;				//3.14の半分の３等分
-	static const float HALF;				//上の半分
-	static const float MOVE_SPEED;			//移動の速度
-	static const int OVER;         // 左右の上限
-	static const int OVER_UP;      // 上の上限
-	static const int OVER_DOWN;    // 下の上限
-	static const int FRAMECNT;     // フレームのカウント
 
 	//D3DXVECTOR3 m_pos;          // 位置
 	//D3DXVECTOR3 m_rot;          // 向き
@@ -75,6 +66,31 @@ private:
 	int m_nSceneCnt;           // 画面遷移する時間
 	static bool m_bMove;          // 動いたかどうか
 	static bool m_bPlayerDeath;         // 死んだかどうか
+
+	//**=================c++版マクロ====================**
+	static const float HALF2;				//3.14の半分の２等分
+	static const float HALF1;				//3.14の半分の３等分
+	static const float HALF;				//上の半分
+	static const float MOVE_SPEED;			//移動の速度
+	static const int OVER;         // 左右の上限
+	static const int OVER_UP;      // 上の上限
+	static const int OVER_DOWN;    // 下の上限
+	static const int FRAMECNT;     // フレームのカウント
+
+	static const D3DXCOLOR COL;   // 色
+	static const float RADIUS;    // 半径
+	static const float SPLIT;     // 分割
+	static const int EFFECTLIFE;  // エフェクトライフ
+
+	static const float MOVE_PALYER;  // プレイヤーの移動量
+	static const float MOVE_PALYER_Z;  // プレイヤーの死んだときの移動量
+	static const float MOVE_PALYER_Y;  // プレイヤーの死んだときの移動量
+
+	static const int SHAKE_FRAME;    // 画面の揺れのフレーム
+	static const int SHAKE_VOLUME_DEATH;  // 画面の揺れの強さ(死んだときの)
+	static const int SHAKE_VOLUME;        // ダメージを受けたときの揺れの強さ
+
+	static const int LIFE_REDUCE;    // ライフを減らす数
 };
 
 #endif

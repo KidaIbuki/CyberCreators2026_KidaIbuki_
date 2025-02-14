@@ -23,10 +23,10 @@ CObject::CObject()
 	m_bDeathAll = false;  // シーン以降でフラグを立てる
 	m_type = NONE;      // タイプの初期化
 
-	m_bNormalUpdate = true;
-	m_bPauseUpdate = false;
-	m_bNormalDraw = false;
-	m_bPauseDraw = true;
+	m_bNormalUpdate = true;   // 通常の更新
+	m_bPauseUpdate = false;   // ポーズ中の更新
+	m_bNormalDraw = false;    // 通常の描画
+	m_bPauseDraw = true;      // ポーズ中の描画
 
 	if (m_pCur[3] != nullptr)
 	{ // 最後尾が空じゃなかった
@@ -49,7 +49,14 @@ CObject::CObject(int nPriority)
 	m_pNext = nullptr;	// オブジェクトの次のポインタを初期化
 	m_pPrev = nullptr;	// オブジェクトの前のポインタを初期化
 	m_bDeath = false;	// 死亡フラグを初期化
+	m_bDeathAll = false;  // シーン以降でフラグを立てる
 	m_type = NONE;      // タイプの初期化
+
+	m_bNormalUpdate = true;   // 通常の更新
+	m_bPauseUpdate = false;   // ポーズ中の更新
+	m_bNormalDraw = false;    // 通常の描画
+	m_bPauseDraw = true;      // ポーズ中の描画
+	
 
 	if (m_pCur[nPriority] != nullptr)
 	{ // 最後尾が空じゃなかった

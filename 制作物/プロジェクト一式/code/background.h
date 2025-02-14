@@ -10,6 +10,8 @@
 #include "pch.h"   // プリコンパイル済みヘッダー
 #include "object3D.h"   // オブジェクト3D
 
+
+
 // ボス戦背景クラス
 class CBackGround :public CObject3D
 {
@@ -25,6 +27,10 @@ public:
 	static void Unload();				//テクスチャのアンロード
 private:
 	static LPDIRECT3DTEXTURE9 m_pTextureTemp;						//テクスチャのテンプレート
+	static const float FIELD_X;     // フレームのカウント
+	static const float FIELD_Z;     // フレームのカウント
+	static const float MOVE_Y;     // フレームのカウント
+
 
 };
 

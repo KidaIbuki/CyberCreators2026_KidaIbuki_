@@ -13,6 +13,20 @@
 LPDIRECT3DTEXTURE9 CBullet::m_pTextureTemp = {};
 
 const int CBullet::LIFE = 1300;
+const D3DXCOLOR CBullet::COL = D3DXCOLOR(0.7f, 0.3f, 0.0f, 1.0f);  // 色
+const float CBullet::RADIUS = 3.0f;  // 半径
+const float CBullet::SPLIT = 1.0f;  // 分割
+const int CBullet::EFFECTLIFE = 10;  // エフェクトのライフ
+const float CBullet::BILLSIZE = 3.0f;  // ビルボードサイズ
+const float CBullet::BULLETSIZE = 4.0f;  // 弾のサイズ
+
+
+const D3DXCOLOR CBulletEnemy::COL = D3DXCOLOR(0.0f, 1.0f, 1.0f, 1.0f);  // 色
+const float CBulletEnemy::RADIUS = 5.0f;  // 半径
+const float CBulletEnemy::SPLIT = 1.0f;  // 分割
+const int CBulletEnemy::EFFECTLIFE = 10;  // エフェクトのライフ
+const float CBulletEnemy::BILLSIZE = 5.0f;  // ビルボードサイズ
+const float CBulletEnemy::BULLETSIZE = 10.0f;  // 弾のサイズ
 
 //==========================================
 // コンストラクタ
@@ -23,7 +37,6 @@ CBullet::CBullet()
 
 	m_pos = { 0.0f,0.0f,0.0f };
 	m_size = { 0.0f,0.0f,0.0f };
-	m_homingStrength = 0.1f;
 	m_nHitCnt = 0;
 }
 //==========================================
@@ -40,8 +53,8 @@ HRESULT CBullet::Init()
 	CBillboard::Init();
 
 	SetType(CObject::TYPE::BULLET);
-	SetBillboard(3.0f, 3.0f, 3.0f);
-	SetSize(D3DXVECTOR3(4.0f, 4.0f, 0.0f));
+	SetBillboard(BILLSIZE, BILLSIZE, BILLSIZE);
+	SetSize(D3DXVECTOR3(BULLETSIZE, BULLETSIZE, 0.0f));
 	m_dwLifeTime = timeGetTime() + LIFE;
 
 
@@ -65,7 +78,7 @@ void CBullet::Update()
 		CBullet::DeathFlag();
 	}
 
-	CEffect::Create(m_pos, D3DXCOLOR(0.7f, 0.3f, 0.0f, 1.0f), 0, 3.0f, 1.0f, 0.0f, 10);
+	CEffect::Create(m_pos, COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);
 
 
 
@@ -170,7 +183,7 @@ void CBullet::Collision()
 
 				D3DXMATRIX rotation1, rotation2;
 				D3DXMatrixIdentity(&rotation1); // 回転なし
-				D3DXMatrixRotationY(&rotation2, D3DXToRadian(45)); // 45度回転
+				D3DXMatrixIdentity(&rotation2); // 回転なし
 
 				OBB obb1(center1, halfWidths1, rotation1);
 				OBB obb2(center2, halfWidths2, rotation2);
@@ -200,7 +213,7 @@ void CBullet::Collision()
 
 				D3DXMATRIX rotation1, rotation2;
 				D3DXMatrixIdentity(&rotation1); // 回転なし
-				D3DXMatrixRotationY(&rotation2, D3DXToRadian(45)); // 45度回転
+				D3DXMatrixIdentity(&rotation2); // 回転なし
 
 				OBB obb1(center1, halfWidths1, rotation1);
 				OBB obb2(center2, halfWidths2, rotation2);
@@ -247,8 +260,8 @@ HRESULT CBulletEnemy::Init()
 	CBillboard::Init();
 
 	SetType(CObject::TYPE::ENEMY_BULLET);
-	SetBillboard(5.0f, 5.0f, 5.0f);
-	SetSize(D3DXVECTOR3(10.0f, 10.0f, 10.0f));
+	SetBillboard(BILLSIZE, BILLSIZE, BILLSIZE);
+	SetSize(D3DXVECTOR3(BULLETSIZE, BULLETSIZE, BULLETSIZE));
 
 	m_dwLifeTime = timeGetTime() + LIFE;
 
@@ -274,7 +287,7 @@ void CBulletEnemy::Update()
 		CBullet::m_bDeath = true;
 	}
 
-	CEffect::Create(m_pos, D3DXCOLOR(0.0f, 1.0f, 1.0f, 1.0f), 0, 5.0f, 1.0f, 0.0f, 10);
+	CEffect::Create(m_pos, COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);
 
 	m_pos += m_move;
 }

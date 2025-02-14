@@ -21,6 +21,33 @@
 //======サウンド========
 #include "sound.h"       // サウンド
 
+
+const float CGame::LIFEPOS_X = 1200.0f;    // ライフ位置
+const float CGame::LIFEPOS_Y = 520.0f;    // ライフ位置
+const float CGame::UIPOS_X = 1200.0f;    // UI位置
+const float CGame::UIPOS_Y = 320.0f;    // UI位置
+const int CGame::FRAMETIME = 20;       // フレームのタイム
+
+const float CGame::PAUSEPOS_FOR = 80.0f;    // ポーズ位置を複数にする
+const float CGame::PAUSEPOS_Y = 300.0f;    // ポーズ位置
+const float CGame::PAUSESIZE_X = 200.0f;   // ポーズサイズ
+const float CGame::PAUSESIZE_Y = 50.0f;    // ポーズサイズ
+
+const float CGame::LEAVE = 810.0f;    // ポーズサイズ
+
+const float CGame::BGPOS_X_1 = 350.0f;   // ボスの位置
+const float CGame::BGPOS_Y_1 = 175.0f;	 // ボスの位置
+const float CGame::BGPOS_Z_1 = 7000.0f;	 // ボスの位置
+const float CGame::BGPOS_Z_2 = 13000.0f; // ボスの位置
+
+const float CGame::BOSSPOS_X = 200.0f;
+
+const float CGame::BLOCKPOS_X_1 = 170.0f;  // ブロックの位置
+const float CGame::BLOCKPOS_X_2 = 340.0f;  // ブロックの位置
+const float CGame::BLOCKPOS_Y_1 = 280.0f;  // ブロックの位置
+const float CGame::BLOCKPOS_Y_2 = 140.0f;  // ブロックの位置
+const float CGame::BLOCK_DIVITE = 330.0f;  // ブロックを離しておく
+
 //====================================
 // コンストラクタ
 //====================================
@@ -29,7 +56,7 @@ CGame::CGame()
 	m_bUseBoss = false;
 	m_nFrame = 1;
 	m_nSelect = 0;
-	m_nFrameTime = 20;
+	m_nFrameTime = FRAMETIME;
 	m_nCnt = 0;
 	m_nCntCreateMap = 0;
 }
@@ -55,9 +82,9 @@ HRESULT CGame::Init()
 	CBackGround::Load();
 	CExplosion::Load();
 
-	CLife::Create(D3DXVECTOR2(1200.0f, 520.0f));   // ライフ
+	CLife::Create(D3DXVECTOR2(LIFEPOS_X, LIFEPOS_Y));   // ライフ
 
-	CUi::Create(D3DXVECTOR2(1200.0f, 320.0f), 0);   // UI
+	CUi::Create(D3DXVECTOR2(UIPOS_X, UIPOS_Y), 0);   // UI
 	CUi::Create(D3DXVECTOR2(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f), 5);
 
 	CPlayerM* pPlayer = CPlayerM::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, D3DX_PI * 1.0f, 0.0f));  // プレイヤー
@@ -73,7 +100,7 @@ HRESULT CGame::Init()
 	// セレクトのオブジェクトを作る
 	for (int i = 0; i < MAX; i++)
 	{
-		m_pPause_Select[i] = CPause_Select::Create(D3DXVECTOR2(SCREEN_WIDTH * 0.5f, 300.0f + (80.0f * i)), D3DXVECTOR2(200.0f, 50.0f), i);
+		m_pPause_Select[i] = CPause_Select::Create(D3DXVECTOR2(SCREEN_WIDTH * 0.5f, PAUSEPOS_Y + (PAUSEPOS_FOR * i)), D3DXVECTOR2(PAUSESIZE_X, PAUSESIZE_Y), i);
 	}
 	m_pPause_Select[0]->SetColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 
@@ -203,7 +230,7 @@ void CGame::Update()
 		{
 			CUi::SubTime();
 			m_nCnt++;
-			m_nFrameTime = 20;
+			m_nFrameTime = FRAMETIME;
 		}
 		if (m_nCnt == 3)
 		{
@@ -244,19 +271,19 @@ void CGame::Update()
 					if (m_nFrame <= 0)
 					{
 						pPlayer->ResetPlayer();
-						CEnemyBoss::Create(D3DXVECTOR3(0.0f, 0.0f, playerPos.z + 200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));   // ボスの生成
-						CBackGround* pBg = CBackGround::Create(D3DXVECTOR3(350.0f, 0.0f, 7000.0f), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.35f));   // ボス戦の背景生成
-						pBg->Create(D3DXVECTOR3(350.0f, 175.0f, 7000.0f), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.65f)); // ボス戦の背景生成
+						CEnemyBoss::Create(D3DXVECTOR3(0.0f, 0.0f, playerPos.z + BOSSPOS_X), D3DXVECTOR3(0.0f, 0.0f, 0.0f));   // ボスの生成
+						CBackGround* pBg = CBackGround::Create(D3DXVECTOR3(BGPOS_X_1, 0.0f, BGPOS_Z_1), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.35f));   // ボス戦の背景生成
+						pBg->Create(D3DXVECTOR3(BGPOS_X_1, BGPOS_Y_1, BGPOS_Z_1), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.65f)); // ボス戦の背景生成
 
-						pBg->Create(D3DXVECTOR3(350.0f, 0.0f, 13000.0f), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.35f));   // ボス戦の背景生成
-						pBg->Create(D3DXVECTOR3(350.0f, 175.0f, 13000.0f), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.65f)); // ボス戦の背景生成
+						pBg->Create(D3DXVECTOR3(BGPOS_X_1, 0.0f, BGPOS_Z_2), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.35f));   // ボス戦の背景生成
+						pBg->Create(D3DXVECTOR3(BGPOS_X_1, BGPOS_Y_1, BGPOS_Z_2), D3DXVECTOR3(0.0f, 0.0f, D3DX_PI * 0.65f)); // ボス戦の背景生成
 
 					}
 					break;
 				}
 
 				// ボス戦の時にブロックを自動生成
-				if (playerPos.z >= POSITION6 + 810.0f * m_nCntCreateMap)
+				if (playerPos.z >= POSITION6 + LEAVE * m_nCntCreateMap)
 				{
 					m_nCntCreateMap++;
 
@@ -265,14 +292,14 @@ void CGame::Update()
 					for (int nCnt = 0; nCnt < 2; nCnt++)
 					{
 						// 天井
-						pBlock->Create3(D3DXVECTOR3(-170.0f + (330.0f * nCnt), 280.0f, POSITION6 + 810.0f * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 0);
+						pBlock->Create3(D3DXVECTOR3(-BLOCKPOS_X_1 + (BLOCK_DIVITE * nCnt), BLOCKPOS_Y_1, POSITION6 + LEAVE * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 0);
 						// 床
-						pBlock->Create3(D3DXVECTOR3(-170.0f + (330.0f * nCnt), -140.0f, POSITION6 + 810.0f * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 0);
+						pBlock->Create3(D3DXVECTOR3(-BLOCKPOS_X_1 + (BLOCK_DIVITE * nCnt), -BLOCKPOS_Y_2, POSITION6 + LEAVE * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 0);
 					}
 					// 左壁
-					pBlock->Create3(D3DXVECTOR3(-340.0f, -140.0f, POSITION6 + 810.0f * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 1);
+					pBlock->Create3(D3DXVECTOR3(-BLOCKPOS_X_2, -BLOCKPOS_Y_2, POSITION6 + LEAVE * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 1);
 					// 右壁
-					pBlock->Create3(D3DXVECTOR3(340.0f, -140.0f, POSITION6 + 810.0f * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 2);
+					pBlock->Create3(D3DXVECTOR3(BLOCKPOS_X_2, -BLOCKPOS_Y_2, POSITION6 + LEAVE * m_nCntCreateMap), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 2);
 				}
 
 			}

@@ -48,6 +48,31 @@ private:
     int m_nCnt;
     int m_nCntCreateMap;    // マップの生成カウント
     int m_nCntCreateMap1;    // マップの生成カウント
+
+    static const float LIFEPOS_X;  // ライフ位置
+    static const float LIFEPOS_Y;  // ライフ位置
+    static const float UIPOS_X;  // UI位置
+    static const float UIPOS_Y;  // UI位置
+    static const int FRAMETIME;  // フレームのタイム
+
+    static const float PAUSEPOS_FOR;  // ポーズ位置を複数にする
+    static const float PAUSEPOS_Y;  // ポーズ位置
+    static const float PAUSESIZE_X;  // ポーズサイズ
+    static const float PAUSESIZE_Y;  // ポーズサイズ
+    static const float LEAVE;    // ブロックの離す距離
+
+    static const float BOSSPOS_X;  // ボスの出現位置
+    static const float BGPOS_X_1;  // BGの位置1
+    static const float BGPOS_Y_1;  // BGの位置1
+    static const float BGPOS_Z_1;  // BGの位置1
+    static const float BGPOS_Z_2;  // BGの位置1
+
+    static const float BLOCKPOS_X_1; // ブロックの位置x
+    static const float BLOCKPOS_X_2; // ブロックの位置x
+
+    static const float BLOCKPOS_Y_1; // ブロックの位置y
+    static const float BLOCKPOS_Y_2; // ブロックの位置y
+    static const float BLOCK_DIVITE;  // ブロックの複数
 };
 
 #endif

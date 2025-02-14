@@ -9,18 +9,29 @@
 #include "playerM.h"
 
 float CLife::m_fTexHeight = 0;
-float CLife::m_fTexWidht = 0;
+float CLife::m_fTexWidth = 0;
 int CLife::m_nFrame = 0;
 int CLife::m_nLife = 0;
+
+const float CLife::TEX_HEIGHT = 0.0f;   // テクスチャの縦の初期値
+const float CLife::TEX_WIDTH = 0.1f;    // テクスチャの横の初期値
+const float CLife::TEX_SIZE_X = 120.0f;   // テクスチャサイズx
+const float CLife::TEX_SIZE_Y = 350.0f;   // テクスチャサイズy
+const float CLife::TEX_MOVE_H = 0.1f;   // テクスチャ移動height
+const float CLife::TEX_MOVE_W = 0.1f;   // テクスチャ移動width
+
+const int CLife::FRAME = 3;     // カウントフレーム
+const int CLife::LIFE = 100;    // ライフ
+
 //=======================================
 // コンストラクタ
 //=======================================
 CLife::CLife()
 {
-	m_fTexHeight = 0.0f;   //縦
-	m_fTexWidht = 0.1f;    //横
-	m_nFrame = 3;
-	m_nLife = 100;
+	m_fTexHeight = TEX_HEIGHT;   //縦
+	m_fTexWidth = TEX_WIDTH;    //横
+	m_nFrame = FRAME;
+	m_nLife = LIFE;
 }
 
 //=======================================
@@ -36,9 +47,7 @@ HRESULT CLife::Init()
 {
 	CObject2D::Init();
 	SetType(CObject::TYPE::LIFE);
-	SetSize(120.0f, 350.0f);
-	//SetColor(D3DXCOLOR(0.0f, 1.0f, 0.3f, 1.0f));
-
+	SetSize(TEX_SIZE_X, TEX_SIZE_Y);
 
 	return S_OK;
 }
@@ -63,9 +72,9 @@ void CLife::Update()
 
 	//テクスチャ座標の設定
 	pVtx[0].tex = D3DXVECTOR2(m_fTexHeight, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(m_fTexWidht, 0.0f);
+	pVtx[1].tex = D3DXVECTOR2(m_fTexWidth, 0.0f);
 	pVtx[2].tex = D3DXVECTOR2(m_fTexHeight, 1.0f);
-	pVtx[3].tex = D3DXVECTOR2(m_fTexWidht, 1.0f);
+	pVtx[3].tex = D3DXVECTOR2(m_fTexWidth, 1.0f);
 
 	//頂点バッファのアンロック
 	m_pVtxBuff->Unlock();
@@ -107,10 +116,10 @@ void CLife::SubLife(int nDamage)
 	if (m_nFrame <= 0)
 	{ // 座標を増やす
 
-		m_fTexHeight += 0.1f;
-		m_fTexWidht += 0.1f;
+		m_fTexHeight += TEX_MOVE_H;
+		m_fTexWidth += TEX_MOVE_W;
 		m_nLife -= nDamage;  // ライフを減らす
-		m_nFrame = 3;   // フレームを戻す
+		m_nFrame = FRAME;   // フレームを戻す
 	}
 	if (m_nLife <= 0)
 	{// ライフが無くなったら

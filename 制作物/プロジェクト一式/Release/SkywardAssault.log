@@ -1,6 +1,12 @@
-﻿  obb.cpp
+﻿  game.cpp
+C:\Users\student\Desktop\SkywardAssault\code\game.cpp(311,5): warning C4456: 'nPriority' を宣言すると、以前のローカル宣言が隠蔽されます
+C:\Users\student\Desktop\SkywardAssault\code\game.cpp(244,11): message : 'nPriority' の宣言を確認してください
+  playerM.cpp
+  target.cpp
+  title.cpp
+  ui.cpp
   コード生成しています。
-  0 of 879 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  0 of 886 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。

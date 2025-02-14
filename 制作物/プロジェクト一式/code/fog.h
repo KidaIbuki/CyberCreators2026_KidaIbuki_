@@ -24,6 +24,9 @@ private:
 
 	float m_fFogStartPos;  // フォグの開始位置
 	float m_fFogEndPos;    // フォグの終了位置
+
+	static const D3DXCOLOR COL;  // フォグカラー
+	static const float DENSITY;  // 密度
 };
 
 #endif

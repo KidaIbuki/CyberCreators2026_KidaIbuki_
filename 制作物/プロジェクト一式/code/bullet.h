@@ -38,8 +38,13 @@ protected:
 	static const int LIFE;				//ライフ
 private:
 	int m_nHitCnt;
-	float m_homingStrength;      // ホーミングの強さ（0.0〜1.0）};
 
+	static const D3DXCOLOR COL;   // 色
+	static const float RADIUS;    // 半径
+	static const float SPLIT;     // 分割
+	static const int EFFECTLIFE;  // エフェクトライフ
+	static const float BILLSIZE;  // ビルボードサイズ
+	static const float BULLETSIZE; // 弾のサイズ
 };
 class CBulletEnemy : public CBullet
 {
@@ -56,6 +61,12 @@ public:
 	static void Unload();													//テクスチャのアンロード
 
 private:
+	static const D3DXCOLOR COL;   // 色
+	static const float RADIUS;    // 半径
+	static const float SPLIT;     // 分割
+	static const int EFFECTLIFE;  // エフェクトライフ
+	static const float BILLSIZE;  // ビルボードサイズ
+	static const float BULLETSIZE; // 弾のサイズ
 
 };
 

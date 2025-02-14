@@ -194,29 +194,7 @@ void CRenderer::DrawFPS()
 	RECT rect = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
 	char aStr[256];
 	int nCntFps = GetFPS();
-	//D3DXVECTOR3 pos = { 0.0f,0.0f,0.0f };
-	//CObject* pTopObject[NUM_MAX_PRIORITY];
-	//CObject::GetObj(pTopObject);
-	//for (int nPriority = 0; nPriority < NUM_MAX_PRIORITY; nPriority++)
-	//{
-	//	//オブジェクト取得
-	//	CObject* pObj = pTopObject[nPriority];
-
-	//	//種類の取得
-	//	while (pObj != nullptr)
-	//	{
-	//		CObject::TYPE type = pObj->GetType();
-	//		CObject* pNext = pObj->GetNext(); // 次のポインタを取得
-	//		if (type == CObject::TYPE::PLAYER_M)
-	//		{
-	//			CPlayerM * pPlayer = (CPlayerM*)pObj; //ダウンキャスト
-	//			pos = pPlayer->GetPos();
-
-	//		}
-	//	}
-	//}
 	//文字列に代入
-	//wsprintf(&aStr[0], "FPS:%d\n pos:%f,%f,%f", nCntFps, pos.x,pos.y,pos.z);
 	wsprintf(&aStr[0], "FPS:%d\n", nCntFps);
 
 	//テキスト描画

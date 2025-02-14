@@ -26,9 +26,23 @@ private:
 	void CollisionTarget();
 	int m_nTargetFrame;         // ターゲットを出現させるカウント
 	bool m_bColor;
-	static const int OVER;
-	static const int OVER_UP;
-	static const int OVER_DOWN;
+	static const float LEFT;   // 各方向の移動する最大値
+	static const float RIGHT;
+	static const float UP;
+	static const float DOWN;
+
+	static const float BILLSIZE_X;   // ビルボードサイズ
+	static const float BILLSIZE_Y;   // ビルボードサイズ
+	static const float BILLSIZE_Z;   // ビルボードサイズ
+
+	static const D3DXCOLOR INIT_COLOR;   // カラーの初期化
+	static const D3DXCOLOR CHANGE_COLOR;   // カラーの変更
+	static const D3DXCOLOR CHANGE_COLOR_ELSE;   // カラーを戻す
+
+	static const float STICK_MOVE_X;   // スティックの移動量
+	static const float STICK_MOVE_Y;   // スティックの移動量
+
+	static const float POS_DISTANS;    // posからどれくらい離すか
 };
 
 #endif

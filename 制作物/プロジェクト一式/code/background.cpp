@@ -10,6 +10,10 @@
 // 静的メンバ変数初期化
 LPDIRECT3DTEXTURE9 CBackGround::m_pTextureTemp = {};
 
+const float CBackGround::FIELD_X = 100.0f;
+const float CBackGround::FIELD_Z = 6000.0f;
+const float CBackGround::MOVE_Y = 0.003f;
+
 //===============================
 // コンストラクタ
 //===============================
@@ -33,8 +37,8 @@ HRESULT CBackGround::Init()
 	SetType(CObject::TYPE::BG);
 	CObject3D::Init();
 	SetTexUV(D3DXVECTOR2(0.0f, 0.0f), D3DXVECTOR2(1.0f, 1.0f));
-	SetField(100.0f, 6000.0f);
-	SetUVmove(D3DXVECTOR2(0.0f, 0.003f));
+	SetField(FIELD_X, FIELD_Z);
+	SetUVmove(D3DXVECTOR2(0.0f, MOVE_Y));
 
 	return S_OK;
 }

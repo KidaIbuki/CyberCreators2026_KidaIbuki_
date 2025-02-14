@@ -24,8 +24,18 @@ public:
 	static void SubLife(int nDamage);
 private:
 	static float m_fTexHeight;   // 縦
-	static float m_fTexWidht;    // 横
+	static float m_fTexWidth;    // 横
 	static int m_nFrame;   // フレームのカウント
 	static int m_nLife;   // ライフ
+
+	static const float TEX_HEIGHT;  // テクスチャの縦の初期値
+	static const float TEX_WIDTH;   // テクスチャの横の初期値
+	static const float TEX_SIZE_X;   // テクスチャのサイズ
+	static const float TEX_SIZE_Y;   // テクスチャのサイズ
+	static const float TEX_MOVE_H;   // テクスチャの移動
+	static const float TEX_MOVE_W;   // テクスチャの移動
+
+	static const int FRAME;         // フレーム
+	static const int LIFE;          // ライフ
 };
 #endif

@@ -8,6 +8,9 @@
 #include "manager.h"
 
 #define NUM (1)   // 0->範囲指定フォグ:  1->密度指定フォグ
+
+const D3DXCOLOR CFog::COL = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);  // フォグカラー
+const float CFog::DENSITY = 0.0005f;  // 密度
 //==============================================
 // コンストラクタ
 //==============================================
@@ -39,12 +42,12 @@ HRESULT CFog::Init()
 	// フォグの有効
 	pDevice->SetRenderState(D3DRS_FOGENABLE, TRUE);
 	// フォグカラーの設定
-	pDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	pDevice->SetRenderState(D3DRS_FOGCOLOR, COL);
 	//フォグパラメーターを設定
 
 #if NUM  // 0か1でフォグ設定を変えれる(変えたらフォグモードも変える)
 
-	m_fFogDensity = 0.0005f;   // 密度設定
+	m_fFogDensity = DENSITY;   // 密度設定
 
 	// D3DFOG_EXP(密度指定の場合)
 	pDevice->SetRenderState(D3DRS_FOGDENSITY, *(DWORD*)(&m_fFogDensity));
@@ -76,21 +79,5 @@ void CFog::Update()
 //==============================================
 void CFog::Draw()
 {
-	CManager* pManager = CManager::GetInstance();
-	LPDIRECT3DDEVICE9 pDevice = pManager->GetRenderer()->GetDevice();		// デバイスを取得
-
-		// アルファブレンディング設定
-	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
-	// アルファテスト設定
-	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	pDevice->SetRenderState(D3DRS_ALPHAREF, 0x08);
-	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-
-	// テクスチャアルファ設定
-	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 
 }

@@ -9,6 +9,10 @@
 
 const int CExplosion::LIFE = 1000;
 LPDIRECT3DTEXTURE9 CExplosion::m_pTextureTemp = {};
+const int CExplosion::DIVIDE = 8;   // 分割数
+const int CExplosion::TIME = 30;    // アニメーションのタイム
+const float CExplosion::SIZE_X = 10.0f;  // テクスチャサイズx
+const float CExplosion::SIZE_Z = 10.0f;  // テクスチャサイズz
 
 #if 1
 //===============================
@@ -36,8 +40,8 @@ HRESULT CExplosion::Init()
 	CObject3D::Init();
 	SetType(CObject::TYPE::EXPLOSION);
 
-	SetAnim(8, 30);
-	SetField(10.0f, 10.0f);
+	SetAnim(DIVIDE, TIME);
+	SetField(SIZE_X, SIZE_Z);
 
 	m_dwLifeTime = timeGetTime() + LIFE;
 

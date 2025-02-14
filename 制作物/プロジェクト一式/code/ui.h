@@ -28,5 +28,24 @@ private:
 	static float m_fTexHeight;   // 縦
 	static float m_fTexWidht;    // 横
 
+	static const int FRAME;  // フレームのカウント
+	static const float REDUCE_POS;  // テクスチャ座標を減らす
+
+	static const float INITIAL_VALUE;   // 位置の初期値
+	static const float TEX_RANGE;      // テクスチャの範囲
+
+	// テクスチャのサイズ
+	static const float TEX_SIZE_X_1;   
+	static const float TEX_SIZE_Y_1;
+
+	static const float TEX_SIZE_X_2;
+	static const float TEX_SIZE_Y_2;
+
+	static const float TEX_SIZE_X_3;
+	static const float TEX_SIZE_Y_3;
+
+	static const float TEX_SIZE_X_4;
+	static const float TEX_SIZE_Y_4;
+
 };
 #endif
