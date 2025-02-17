@@ -208,8 +208,8 @@ void CTarget::CollisionTarget()
 			if (type == CObject::TYPE::ENEMY_X)
 			{
 				bool bSwitch = pManager->GetSwitching();
+				CEnemyX* pEnemy = static_cast<CEnemyX*>(pObj); //ダウンキャスト
 
-				CEnemyX* pEnemy = (CEnemyX*)pObj; //ダウンキャスト
 				D3DXVECTOR3 enemyPos = pEnemy->GetPos();
 				D3DXVECTOR3 enemySize = pEnemy->GetSize();
 				// OBB1とOBB2を初期化

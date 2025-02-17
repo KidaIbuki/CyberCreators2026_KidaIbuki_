@@ -253,7 +253,7 @@ void CGame::Update()
 			CObject* pNext = pObj->GetNext(); // 次のポインタを取得
 			if (type == CObject::TYPE::PLAYER_M)
 			{
-				CPlayerM* pPlayer = (CPlayerM*)pObj; //ダウンキャスト
+				CPlayerM* pPlayer = static_cast<CPlayerM*>(pObj); //ダウンキャスト
 
 				D3DXVECTOR3 playerPos = pPlayer->GetPos();
 				if (playerPos.z >= POSITION1 && playerPos.z <= POSITION5)
@@ -306,7 +306,7 @@ void CGame::Update()
 			// プレイヤーがブロックより先に行ったら後ろのを消す
 			else if (type == CObject::TYPE::BLOCK)
 			{
-				CBlockX* pBlock = (CBlockX*)pObj; //ダウンキャスト
+				CBlockX* pBlock = static_cast<CBlockX*>(pObj); //ダウンキャスト
 				D3DXVECTOR3 posBlock = pBlock->GetPos();
 				for (int nPriority = 0; nPriority < NUM_MAX_PRIORITY; nPriority++)
 				{
@@ -322,7 +322,7 @@ void CGame::Update()
 						// 再びプレイヤーを探す
 						if (type1 == CObject::TYPE::PLAYER_M)
 						{
-							CPlayerM* pPlayer = (CPlayerM*)pObj1; //ダウンキャスト
+							CPlayerM* pPlayer = static_cast<CPlayerM*>(pObj); //ダウンキャスト
 							D3DXVECTOR3 posPlayer = pPlayer->GetPos();
 							if (posBlock.z < posPlayer.z - 2000.0f)
 							{

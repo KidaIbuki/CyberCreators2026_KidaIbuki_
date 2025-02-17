@@ -1,54 +1,54 @@
-//=================================
+ï»¿//=================================
 // 
-// —LŒü‹«ŠEƒ{ƒbƒNƒX ƒNƒ‰ƒX@obb.cpp
+// æœ‰å‘å¢ƒç•Œãƒœãƒƒã‚¯ã‚¹ ã‚¯ãƒ©ã‚¹ã€€obb.cpp
 //outher kida ibuki 
 // 
 //==================================
 
 #include "obb.h"
 
-// [ˆ—‚Ìd‘g‚İ]
-// 1.OBB‚Ì’è‹`
-//   EOBB‚Í’†SÀ•W(center)
-//   EOBB‚Ìƒ[ƒJƒ‹²(axes)
-//   EOBB‚ÌŠe²•ûŒü‚Ì”¼•(halfWidths)
-//     ‚Å’è‹`
-// 2.’¸“_À•W‚ÌŒvZ
-//   EGetVector(int index)‚É‚æ‚èAOBB‚Ì8’¸“_‚ğŒvZ
-// 3.Õ“Ë”»’è(SAT)
-//   E•ª—£²’è—(SAT)‚ğ—p‚¢‚½”»’è
-//   E15–{‚Ì”»’è²(6–{‚ÌOBB² + 9–{‚ÌŠOÏ²)
-//   EŠe²‚Ì“Š‰e‚µ‚Ä•ª—£‚ª‚ ‚é‚©Šm”F
-// 4.“Š‰e‹——£‚ÌŒvZ
-//   EProjectOntoAxis‚É‚æ‚èAOBB‚ÌŠe²‚ğ“Š‰e‚µA’·‚³‚ğæ“¾
+// [å‡¦ç†ã®ä»•çµ„ã¿]
+// 1.OBBã®å®šç¾©
+//   ãƒ»OBBã¯ä¸­å¿ƒåº§æ¨™(center)
+//   ãƒ»OBBã®ãƒ­ãƒ¼ã‚«ãƒ«è»¸(axes)
+//   ãƒ»OBBã®å„è»¸æ–¹å‘ã®åŠå¹…(halfWidths)
+//     ã§å®šç¾©
+// 2.é ‚ç‚¹åº§æ¨™ã®è¨ˆç®—
+//   ãƒ»GetVector(int index)ã«ã‚ˆã‚Šã€OBBã®8é ‚ç‚¹ã‚’è¨ˆç®—
+// 3.è¡çªåˆ¤å®š(SAT)
+//   ãƒ»åˆ†é›¢è»¸å®šç†(SAT)ã‚’ç”¨ã„ãŸåˆ¤å®š
+//   ãƒ»15æœ¬ã®åˆ¤å®šè»¸(6æœ¬ã®OBBè»¸ + 9æœ¬ã®å¤–ç©è»¸)
+//   ãƒ»å„è»¸ã®æŠ•å½±ã—ã¦åˆ†é›¢ãŒã‚ã‚‹ã‹ç¢ºèª
+// 4.æŠ•å½±è·é›¢ã®è¨ˆç®—
+//   ãƒ»ProjectOntoAxisã«ã‚ˆã‚Šã€OBBã®å„è»¸ã‚’æŠ•å½±ã—ã€é•·ã•ã‚’å–å¾—
 
 //========================================
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //========================================
 OBB::OBB(const D3DXVECTOR3& center, const D3DXVECTOR3& halfWidths, const D3DXMATRIX& rotationMatrix)
 {
 	this->center = center;
 	this->halfWidths = halfWidths;
 
-	// ‰ñ“]s—ñ‚©‚çƒ[ƒJƒ‹²‚ğİ’è
-	axes[0] = D3DXVECTOR3(rotationMatrix._11, rotationMatrix._12, rotationMatrix._13);  // x²
-	axes[1] = D3DXVECTOR3(rotationMatrix._21, rotationMatrix._22, rotationMatrix._23);  // y²
-	axes[2] = D3DXVECTOR3(rotationMatrix._31, rotationMatrix._32, rotationMatrix._33);  // z²
+	// å›è»¢è¡Œåˆ—ã‹ã‚‰ãƒ­ãƒ¼ã‚«ãƒ«è»¸ã‚’è¨­å®š
+	axes[0] = D3DXVECTOR3(rotationMatrix._11, rotationMatrix._12, rotationMatrix._13);  // xè»¸
+	axes[1] = D3DXVECTOR3(rotationMatrix._21, rotationMatrix._22, rotationMatrix._23);  // yè»¸
+	axes[2] = D3DXVECTOR3(rotationMatrix._31, rotationMatrix._32, rotationMatrix._33);  // zè»¸
 
 }
 //========================================
-// ’¸“_‚ğæ“¾
+// é ‚ç‚¹ã‚’å–å¾—
 //========================================
 D3DXVECTOR3 OBB::GetVertex(int index) const
 {
 	D3DXVECTOR3 vertex = center;
 
-	// 1.index ‚Ìƒrƒbƒg‰‰Z‚ğ—˜—p‚µAŠe²‚Ì³•‰•ûŒü‚ğŒˆ’è
+	// 1.index ã®ãƒ“ãƒƒãƒˆæ¼”ç®—ã‚’åˆ©ç”¨ã—ã€å„è»¸ã®æ­£è² æ–¹å‘ã‚’æ±ºå®š
 	int signX = (index & 1) ? 1 : -1;
 	int signY = (index & 2) ? 1 : -1;
 	int signZ = (index & 4) ? 1 : -1;
 
-	// 2.OBB‚Ì’†S(center)‚É‘Î‚µAŠe²•ûŒü(axes[0],axes[1],axes[2])‚Ì‰e‹¿‚ğ‰ÁZ
+	// 2.OBBã®ä¸­å¿ƒ(center)ã«å¯¾ã—ã€å„è»¸æ–¹å‘(axes[0],axes[1],axes[2])ã®å½±éŸ¿ã‚’åŠ ç®—
 	vertex += axes[0] * (signX * halfWidths.x);
 	vertex += axes[1] * (signY * halfWidths.y);
 	vertex += axes[2] * (signZ * halfWidths.z);
@@ -56,26 +56,26 @@ D3DXVECTOR3 OBB::GetVertex(int index) const
 	return vertex;
 }
 //========================================
-// OBB“¯m‚ÌÕ“Ë”»’è
+// OBBåŒå£«ã®è¡çªåˆ¤å®š
 //========================================
 bool OBB::CheckOverlap(const OBB& other) const
 {
     D3DXVECTOR3 axesToTest[15];
     int axisIndex = 0;
 
-	// 1.”»’è‚·‚é²‚ÌƒŠƒXƒg‚ğì¬
-	//   Ethis OBB‚Ì3²(axes[0], axes[1], axes[2])
-    //   Eother OBB‚Ì3²(other.axes[0], other.axes[1], other.axes[2])
-    //   E—¼OBB‚Ì²‚ÌƒNƒƒXÏ(ŠOÏ)‚©‚ç9‚Â‚ÌV‚µ‚¢²‚ğŒvZ
+	// 1.åˆ¤å®šã™ã‚‹è»¸ã®ãƒªã‚¹ãƒˆã‚’ä½œæˆ
+	//   ãƒ»this OBBã®3è»¸(axes[0], axes[1], axes[2])
+    //   ãƒ»other OBBã®3è»¸(other.axes[0], other.axes[1], other.axes[2])
+    //   ãƒ»ä¸¡OBBã®è»¸ã®ã‚¯ãƒ­ã‚¹ç©(å¤–ç©)ã‹ã‚‰9ã¤ã®æ–°ã—ã„è»¸ã‚’è¨ˆç®—
 
-    // ©g‚Æ‘¼‚ÌOBB‚Ì²
+    // è‡ªèº«ã¨ä»–ã®OBBã®è»¸
     for (int i = 0; i < 3; ++i) 
     {
         axesToTest[axisIndex++] = axes[i];
         axesToTest[axisIndex++] = other.axes[i];
     }
 
-    // ²‚ÌƒNƒƒXÏ
+    // è»¸ã®ã‚¯ãƒ­ã‚¹ç©
     for (int i = 0; i < 3; ++i)
     {
         for (int j = 0; j < 3; ++j) 
@@ -83,53 +83,53 @@ bool OBB::CheckOverlap(const OBB& other) const
             D3DXVECTOR3 crossAxis;
             D3DXVec3Cross(&crossAxis, &axes[i], &other.axes[j]);
             if (D3DXVec3Length(&crossAxis) > 0.0001f)
-            { // —LŒø‚È²
+            { // æœ‰åŠ¹ãªè»¸
                 axesToTest[axisIndex++] = crossAxis;
             }
         }
     }
 
-	// 2.Še²‚É‘Î‚µ‚Ä•ª—£²‚Ìƒ`ƒFƒbƒN
-	// this OBB‚Æother OBB‚ğaxis‚É“Š‰e‚µA‚»‚Ì‡Œv“Š‰e‹——£‚ğ‚Æ’†SŠÔ‹——£‚ğ”äŠr
+	// 2.å„è»¸ã«å¯¾ã—ã¦åˆ†é›¢è»¸ã®ãƒã‚§ãƒƒã‚¯
+	// this OBBã¨other OBBã‚’axisã«æŠ•å½±ã—ã€ãã®åˆè¨ˆæŠ•å½±è·é›¢ã‚’ã¨ä¸­å¿ƒé–“è·é›¢ã‚’æ¯”è¼ƒ
 	
-    // ’†SŠÔ‚Ì‹——£
+    // ä¸­å¿ƒé–“ã®è·é›¢
     D3DXVECTOR3 t = other.center - center;
 
-    // •ª—£²‚²‚Æ‚É”»’è
+    // åˆ†é›¢è»¸ã”ã¨ã«åˆ¤å®š
     for (int i = 0; i < axisIndex; ++i)
     {
         const D3DXVECTOR3& axis = axesToTest[i];
         D3DXVECTOR3 normAxis;
         D3DXVec3Normalize(&normAxis, &axis);
 
-        // ŠeOBB‚ğ²‚É“Š‰e
+        // å„OBBã‚’è»¸ã«æŠ•å½±
         float projection1 = ProjectOntoAxis(normAxis);
         float projection2 = other.ProjectOntoAxis(normAxis);
         float centerDistance = fabs(D3DXVec3Dot(&t, &normAxis));
 
-        // “Š‰e‚ª•ª—£‚µ‚Ä‚¢‚éê‡
+        // æŠ•å½±ãŒåˆ†é›¢ã—ã¦ã„ã‚‹å ´åˆ
         if (centerDistance > projection1 + projection2)
         {
-			// •ª—£‚ªŠm”F‚³‚ê‚½‚çfalse‚ğ•Ô‚·(Õ“Ë‚µ‚Ä‚¢‚È‚¢)
+			// åˆ†é›¢ãŒç¢ºèªã•ã‚ŒãŸã‚‰falseã‚’è¿”ã™(è¡çªã—ã¦ã„ãªã„)
             return false;
         }
     }
-	// 3.‚·‚×‚Ä‚Ì²‚Å•ª—£‚ªŠm”F‚Å‚«‚È‚©‚Á‚½‚çtrue‚ğ•Ô‚·(Õ“Ë‚µ‚Ä‚¢‚é)
-    return true;  // •ª—£‚µ‚Ä‚¢‚È‚¢ -> Õ“Ë
+	// 3.ã™ã¹ã¦ã®è»¸ã§åˆ†é›¢ãŒç¢ºèªã§ããªã‹ã£ãŸã‚‰trueã‚’è¿”ã™(è¡çªã—ã¦ã„ã‚‹)
+    return true;  // åˆ†é›¢ã—ã¦ã„ãªã„ -> è¡çª
 }
 //========================================
-// w’è²‚Ö‚Ì“Š‰e‹——£‚ğŒvZ
+// æŒ‡å®šè»¸ã¸ã®æŠ•å½±è·é›¢ã‚’è¨ˆç®—
 //========================================
 float OBB::ProjectOntoAxis(const D3DXVECTOR3& axis) const
 {
-	// 1.OBB‚ÌŠe²(axes[0],axes[1],axes[2])‚ğaxis‚É“Š‰e
+	// 1.OBBã®å„è»¸(axes[0],axes[1],axes[2])ã‚’axisã«æŠ•å½±
     return fabs(D3DXVec3Dot(&axes[0], &axis) * halfWidths.x) +
         fabs(D3DXVec3Dot(&axes[1], &axis) * halfWidths.y) +
         fabs(D3DXVec3Dot(&axes[2], &axis) * halfWidths.z);
-	// 2.Še²‚²‚Æ‚ÌƒXƒJƒ‰[’l‚ğ‡Œv‚µA‘S‘Ì‚Ì“Š‰e‹——£‚ğŒvZ
+	// 2.å„è»¸ã”ã¨ã®ã‚¹ã‚«ãƒ©ãƒ¼å€¤ã‚’åˆè¨ˆã—ã€å…¨ä½“ã®æŠ•å½±è·é›¢ã‚’è¨ˆç®—
 }
 //========================================
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //========================================
 Sphere::Sphere(const D3DXVECTOR3& center, float radius)
 {
@@ -138,30 +138,30 @@ Sphere::Sphere(const D3DXVECTOR3& center, float radius)
 }
 
 //========================================
-// ‹…“¯m‚ÌÕ“Ë”»’è
+// çƒåŒå£«ã®è¡çªåˆ¤å®š
 //========================================
 bool Sphere::CheckOverlap(const Sphere& other) const
 {
 	D3DXVECTOR3 difference = center - other.center;
-    // 2‚Â‚Ì’†S“_‚Ì‹——£‚ğŒvZ
-	float distanceSquared = D3DXVec3LengthSq(&difference);    // ”¼Œa‚Ì‡Œv‚Æ”äŠr
+    // 2ã¤ã®ä¸­å¿ƒç‚¹ã®è·é›¢ã‚’è¨ˆç®—
+	float distanceSquared = D3DXVec3LengthSq(&difference);    // åŠå¾„ã®åˆè¨ˆã¨æ¯”è¼ƒ
     float radiusSum = radius + other.radius;
 
     return distanceSquared <= (radiusSum * radiusSum);
 }
 //========================================
-// ‹…‚ÆOBB‚ÌÕ“Ë”»’è
+// çƒã¨OBBã®è¡çªåˆ¤å®š
 //========================================
 bool Sphere::CheckOverlap(const OBB& box) const
 {
-    D3DXVECTOR3 closestPoint = box.GetCenter();  // OBB ‚Ì’†S‚©‚çn‚ß‚é
+    D3DXVECTOR3 closestPoint = box.GetCenter();  // OBB ã®ä¸­å¿ƒã‹ã‚‰å§‹ã‚ã‚‹
     D3DXVECTOR3 sphereToBox = center - box.GetCenter();
     for (int i = 0; i < 3; ++i)
     {
 		D3DXVECTOR3 axis = box.GetAxis(i);
 
 		float distance = D3DXVec3Dot(&sphereToBox, &axis);
-        // OBB ‚Ì”ÍˆÍ“à‚É§ŒÀ
+        // OBB ã®ç¯„å›²å†…ã«åˆ¶é™
         if (distance > box.GetHalfwidths()[i])
         {
             distance = box.GetHalfwidths()[i];
@@ -173,17 +173,43 @@ bool Sphere::CheckOverlap(const OBB& box) const
         closestPoint += box.GetAxis(i) * distance;
     }
 
-    // Å‹ßÚ“_‚Æ‹…‚Ì’†S‚Ì‹——£‚ğ”äŠr
+    // æœ€è¿‘æ¥ç‚¹ã¨çƒã®ä¸­å¿ƒã®è·é›¢ã‚’æ¯”è¼ƒ
     D3DXVECTOR3 diff = center - closestPoint;
     return D3DXVec3LengthSq(&diff) <= (radius * radius);
 }
 //=============================================
-// OBB‚Ìƒ‰ƒCƒ“‚ğ•`‰æ(ƒfƒoƒbƒN—p)
+// 8ã¤ã®é ‚ç‚¹ã‚’å–å¾—
+//=============================================
+std::vector<D3DXVECTOR3> OBB::GetCorners() const
+{
+    std::vector<D3DXVECTOR3> corners;
+    corners.reserve(8); // é ‚ç‚¹ã¯8ã¤
+
+    D3DXVECTOR3 center = this->center;
+    const D3DXVECTOR3& A0 = this->axes[0];
+    const D3DXVECTOR3& A1 = this->axes[1];
+    const D3DXVECTOR3& A2 = this->axes[2];
+    const D3DXVECTOR3& h = this->halfWidths;
+
+    // 8é ‚ç‚¹ã®è¨ˆç®—
+    for (int i = 0; i < 8; ++i) {
+        D3DXVECTOR3 corner = center;
+        corner += A0 * h.x * ((i & 1) ? 1.0f : -1.0f);
+        corner += A1 * h.y * ((i & 2) ? 1.0f : -1.0f);
+        corner += A2 * h.z * ((i & 4) ? 1.0f : -1.0f);
+        corners.push_back(corner);
+    }
+
+    return corners;
+}
+
+//=============================================
+// OBBã®ãƒ©ã‚¤ãƒ³ã‚’æç”»(ãƒ‡ãƒãƒƒã‚¯ç”¨)
 //=============================================
 void OBB::DrawOBB(IDirect3DDevice9* device, const D3DXVECTOR3& center, const D3DXVECTOR3 halfSize, const D3DXVECTOR3 axis[3], D3DCOLOR color)
 {
 
-	// OBB‚Ì8‚Â‚Ì’¸“_‚ğŒvZ
+	// OBBã®8ã¤ã®é ‚ç‚¹ã‚’è¨ˆç®—
 	D3DXVECTOR3 corners[8];
 	for (int i = 0; i < 8; i++) {
 		corners[i] = center;
@@ -192,11 +218,11 @@ void OBB::DrawOBB(IDirect3DDevice9* device, const D3DXVECTOR3& center, const D3D
 		corners[i] += axis[2] * (halfSize.z * ((i & 4) ? 1.0f : -1.0f));
 	}
 
-	// OBB ‚ÌƒGƒbƒW‚ğŒ‹‚Ôƒ‰ƒCƒ“ƒŠƒXƒgi12–{‚Ìüj
+	// OBB ã®ã‚¨ãƒƒã‚¸ã‚’çµã¶ãƒ©ã‚¤ãƒ³ãƒªã‚¹ãƒˆï¼ˆ12æœ¬ã®ç·šï¼‰
 	int indices[] = {
-		0,1,  1,3,  3,2,  2,0,  // ‘O–Ê
-		4,5,  5,7,  7,6,  6,4,  // ”w–Ê
-		0,4,  1,5,  2,6,  3,7   // ‘OŒã‚ğ‚Â‚È‚®ü
+		0,1,  1,3,  3,2,  2,0,  // å‰é¢
+		4,5,  5,7,  7,6,  6,4,  // èƒŒé¢
+		0,4,  1,5,  2,6,  3,7   // å‰å¾Œã‚’ã¤ãªãç·š
 	};
 
 	Vertex lines[24];
@@ -205,39 +231,39 @@ void OBB::DrawOBB(IDirect3DDevice9* device, const D3DXVECTOR3& center, const D3D
 		lines[i * 2 + 1] = { corners[indices[i * 2 + 1]], color };
 	}
 
-	// ’¸“_ƒtƒH[ƒ}ƒbƒgİ’è
+	// é ‚ç‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆè¨­å®š
 	device->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
 
-	// ƒ‰ƒCƒ“•`‰æ
+	// ãƒ©ã‚¤ãƒ³æç”»
 	device->DrawPrimitiveUP(D3DPT_LINELIST, 12, lines, sizeof(Vertex));
 }
 
 //=============================================
-// ‹…‘Ì‚Ìƒ‰ƒCƒ“‚ğ•`‰æ(ƒfƒoƒbƒN—p)
+// çƒä½“ã®ãƒ©ã‚¤ãƒ³ã‚’æç”»(ãƒ‡ãƒãƒƒã‚¯ç”¨)
 //=============================================
 void Sphere::DrawSphere(IDirect3DDevice9* device, const D3DXVECTOR3& center, float radius, int slices, int stacks, D3DCOLOR color)
 {
-	int numLines = (slices + 1) * stacks + (stacks + 1) * slices;  // ˆÜ“x•ûŒü + Œo“x•ûŒü
-	int numVertices = numLines * 2;  // Šeƒ‰ƒCƒ“‚É2‚Â‚Ì’¸“_
+	int numLines = (slices + 1) * stacks + (stacks + 1) * slices;  // ç·¯åº¦æ–¹å‘ + çµŒåº¦æ–¹å‘
+	int numVertices = numLines * 2;  // å„ãƒ©ã‚¤ãƒ³ã«2ã¤ã®é ‚ç‚¹
 
-	// ’¸“_”z—ñ‚ğŠm•Û
+	// é ‚ç‚¹é…åˆ—ã‚’ç¢ºä¿
 	Vertex* lines = new Vertex[numVertices];
 
-	// ƒCƒ“ƒfƒbƒNƒX‚Ì‰Šú‰»
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®åˆæœŸåŒ–
 	int index = 0;
-	// Œo“x•ûŒüicƒ‰ƒCƒ“j
+	// çµŒåº¦æ–¹å‘ï¼ˆç¸¦ãƒ©ã‚¤ãƒ³ï¼‰
 	for (int i = 0; i <= slices; i++) 
 	{
-		// ƒÆithetaj‚Í 0‹ ‚©‚ç 360‹i0 ‚©‚ç 2ƒÎj‚Ü‚Å slices •ªŠ„‚·‚éB
+		// Î¸ï¼ˆthetaï¼‰ã¯ 0Â° ã‹ã‚‰ 360Â°ï¼ˆ0 ã‹ã‚‰ 2Ï€ï¼‰ã¾ã§ slices åˆ†å‰²ã™ã‚‹ã€‚
 		float theta = (float)i / slices * 2.0f * D3DX_PI;
-		// ˆÜ“x•ûŒüi‰¡ƒ‰ƒCƒ“j
+		// ç·¯åº¦æ–¹å‘ï¼ˆæ¨ªãƒ©ã‚¤ãƒ³ï¼‰
 		for (int j = 0; j < stacks; j++)
 		{
-			// Še ƒÓ(ƒtƒ@ƒC) ‚É‘Î‚µ‚ÄA0‹ ‚©‚ç 360‹ ‚Ü‚Å ƒÆ ‚ğ‰ñ“]‚³‚¹‚Ä‰¡‚Ìƒ‰ƒCƒ“‚ğ¶¬B
+			// å„ Ï†(ãƒ•ã‚¡ã‚¤) ã«å¯¾ã—ã¦ã€0Â° ã‹ã‚‰ 360Â° ã¾ã§ Î¸ ã‚’å›è»¢ã•ã›ã¦æ¨ªã®ãƒ©ã‚¤ãƒ³ã‚’ç”Ÿæˆã€‚
 			float phi1 = (float)j / stacks * D3DX_PI - (D3DX_PI / 2.0f);
 			float phi2 = (float)(j + 1) / stacks * D3DX_PI - (D3DX_PI / 2.0f);
 
-			// ‹…–ÊÀ•W‚ÌŒvZ
+			// çƒé¢åº§æ¨™ã®è¨ˆç®—
 			lines[index++] = { center + D3DXVECTOR3(radius * cosf(phi1) * cosf(theta),
 													 radius * sinf(phi1),
 													 radius * cosf(phi1) * sinf(theta)), color };
@@ -247,11 +273,192 @@ void Sphere::DrawSphere(IDirect3DDevice9* device, const D3DXVECTOR3& center, flo
 													 radius * cosf(phi2) * sinf(theta)), color };
 		}
 	}
-	// ’¸“_ƒtƒH[ƒ}ƒbƒgİ’è
+	// é ‚ç‚¹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆè¨­å®š
 	device->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
 
-	// ƒ‰ƒCƒ“•`‰æ
+	// ãƒ©ã‚¤ãƒ³æç”»
 	device->DrawPrimitiveUP(D3DPT_LINELIST, numLines, lines, sizeof(Vertex));
 
 	delete[] lines;
+}
+//=========================================
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+//=========================================
+Capsule::Capsule(const D3DXVECTOR3& center, float radius, float height, const D3DXMATRIX& rotationMatrix)
+    : center(center), radius(radius), height(height), rotationMatrix(rotationMatrix) {}
+
+//=========================================
+// **ã‚«ãƒ—ã‚»ãƒ«ã®ä¸¡ç«¯ã‚’å–å¾—**
+//=========================================
+void Capsule::GetEndpoints(D3DXVECTOR3& outStart, D3DXVECTOR3& outEnd) const
+{
+    D3DXVECTOR3 localStart(0, -height * 0.5f, 0);
+    D3DXVECTOR3 localEnd(0, height * 0.5f, 0);
+
+    // å›è»¢ã‚’é©ç”¨
+    D3DXVec3TransformCoord(&outStart, &localStart, &rotationMatrix);
+    D3DXVec3TransformCoord(&outEnd, &localEnd, &rotationMatrix);
+
+    // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã¸
+    outStart += center;
+    outEnd += center;
+}
+
+//=========================================
+// **ã‚«ãƒ—ã‚»ãƒ«ã®æç”»**
+//=========================================
+void Capsule::DrawCapsule(IDirect3DDevice9* device, int segments, D3DXCOLOR color) const
+{
+    std::vector<Vertex> vertices;
+    D3DXVECTOR3 start, end;
+    GetEndpoints(start, end);
+
+    // è»¸æ–¹å‘
+    D3DXVECTOR3 axis = end - start;
+    if (D3DXVec3LengthSq(&axis) < 0.0001f)
+    {
+        return;
+    }
+    D3DXVec3Normalize(&axis, &axis);
+
+    // ç›´äº¤ã™ã‚‹åŸºæº–ãƒ™ã‚¯ãƒˆãƒ«
+    D3DXVECTOR3 up = fabs(axis.y) < 0.99f ? D3DXVECTOR3(0, 1, 0) : D3DXVECTOR3(1, 0, 0);
+    D3DXVECTOR3 right;
+    D3DXVec3Cross(&right, &up, &axis);
+    D3DXVec3Normalize(&right, &right);
+    D3DXVECTOR3 newUp;
+    D3DXVec3Cross(&newUp, &axis, &right);
+
+    // **å††æŸ±éƒ¨åˆ†**
+    std::vector<D3DXVECTOR3> topCircle;
+    std::vector<D3DXVECTOR3> bottomCircle;
+
+    for (int i = 0; i < segments; ++i)
+    {
+        float theta = (D3DX_PI * 2.0f * i) / segments;
+        float x = cosf(theta) * radius;
+        float y = sinf(theta) * radius;
+        D3DXVECTOR3 circlePoint = right * x + newUp * y;
+
+        topCircle.push_back(end + circlePoint);
+        bottomCircle.push_back(start + circlePoint);
+
+        vertices.push_back({ start + circlePoint, color });
+        vertices.push_back({ end + circlePoint, color });
+    }
+
+    // **å††æŸ±ã®ãƒªãƒ³ã‚°**
+    for (int i = 0; i < segments; ++i)
+    {
+        int next = (i + 1) % segments;
+        vertices.push_back({ topCircle[i], color });
+        vertices.push_back({ topCircle[next], color });
+        vertices.push_back({ bottomCircle[i], color });
+        vertices.push_back({ bottomCircle[next], color });
+    }
+
+    // **åŠçƒã®ãƒªãƒ³ã‚°**
+    int hemisphereSegments = segments / 2;
+    for (int i = 1; i <= hemisphereSegments; ++i)
+    {
+        float phi = (D3DX_PI * 0.5f * i) / hemisphereSegments; // 0 ã€œ 90 åº¦
+        float sinPhi = sinf(phi);
+        float cosPhi = cosf(phi);
+
+        std::vector<D3DXVECTOR3> upperRing;
+        std::vector<D3DXVECTOR3> lowerRing;
+
+        for (int j = 0; j < segments; ++j)
+        {
+            float theta = (D3DX_PI * 2.0f * j) / segments;
+            float x = cosf(theta) * sinPhi * radius;
+            float y = sinf(theta) * sinPhi * radius;
+            float z = cosPhi * radius;
+
+            // **ä¿®æ­£ï¼šz ã®ç¬¦å·ã‚’é€†ã«ã™ã‚‹**
+            upperRing.push_back(end + right * x + newUp * y + axis * z); // ä¿®æ­£
+            lowerRing.push_back(start + right * x + newUp * y - axis * z); // ä¿®æ­£
+        }
+
+        for (int j = 0; j < segments; ++j)
+        {
+            int next = (j + 1) % segments;
+
+            vertices.push_back({ upperRing[j], color });
+            vertices.push_back({ upperRing[next], color });
+
+            vertices.push_back({ lowerRing[j], color });
+            vertices.push_back({ lowerRing[next], color });
+        }
+    }
+    // **Direct3D ã§æç”»**
+    device->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
+    device->DrawPrimitiveUP(D3DPT_LINELIST, vertices.size() / 2, vertices.data(), sizeof(Vertex));
+
+}
+//=========================================
+// **ã‚«ãƒ—ã‚»ãƒ« vs OBB ã®è¡çªåˆ¤å®š**
+//=========================================
+bool Capsule::CapsuleVsOBB_SAT(const OBB& obb) const
+{
+    D3DXVECTOR3 start, end;
+    GetEndpoints(start, end);
+
+    std::vector<D3DXVECTOR3> obbAxes = { obb.GetAxis(0), obb.GetAxis(1), obb.GetAxis(2) };
+    D3DXVECTOR3 capsuleAxis = end - start;
+    D3DXVec3Normalize(&capsuleAxis, &capsuleAxis);
+
+    std::vector<D3DXVECTOR3> testAxes = obbAxes;
+    testAxes.push_back(capsuleAxis);
+
+    for (const auto& obbAxis : obbAxes)
+    {
+        D3DXVECTOR3 cross;
+        D3DXVec3Cross(&cross, &obbAxis, &capsuleAxis);
+        if (D3DXVec3LengthSq(&cross) > 1e-6f)
+        {
+            D3DXVec3Normalize(&cross, &cross);
+            testAxes.push_back(cross);
+        }
+    }
+
+    std::vector<D3DXVECTOR3> obbVertices = obb.GetCorners();
+    std::vector<D3DXVECTOR3> capsulePoints = { start, end };
+
+    for (const auto& axis : testAxes)
+    {
+        float minObb, maxObb, minCapsule, maxCapsule;
+        ProjectOntoAxis(axis, obbVertices, minObb, maxObb);
+        ProjectOntoAxis(axis, capsulePoints, minCapsule, maxCapsule);
+
+        minCapsule -= radius;
+        maxCapsule += radius;
+
+        if (!Overlaps(minObb, maxObb, minCapsule, maxCapsule))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+//========================================
+// æŠ•å½±ç¯„å›²ã‚’è¨ˆç®—
+//========================================
+void ProjectOntoAxis(const D3DXVECTOR3& axis, const std::vector<D3DXVECTOR3>& points, float& outMin, float& outMax)
+{
+    outMin = outMax = D3DXVec3Dot(&points[0], &axis);  // æœ€åˆã®ç‚¹ã‚’åŸºæº–ã«
+
+    for (size_t i = 1; i < points.size(); ++i) {
+        float projection = D3DXVec3Dot(&points[i], &axis);
+        if (projection < outMin) outMin = projection;
+        if (projection > outMax) outMax = projection;
+    }
+}
+//========================================
+// æŠ•å½±ç¯„å›²ãŒé‡ãªã‚‹ã‹ãƒã‚§ãƒƒã‚¯
+//========================================
+bool Overlaps(float minA, float maxA, float minB, float maxB)
+{
+    return !(maxA < minB || maxB < minA);
 }

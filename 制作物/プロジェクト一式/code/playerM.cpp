@@ -171,7 +171,8 @@ void CPlayerM::Update()
 			CObject* pNext = pObj->GetNext(); // 次のポインタを取得
 			if (type == CObject::TYPE::TARGET)
 			{
-				CTarget* pTarget = (CTarget*)pObj; //ダウンキャスト
+				CTarget* pTarget = static_cast<CTarget*>(pObj); //ダウンキャスト
+
 				if (pTarget != nullptr)
 				{
 					D3DXVECTOR3 targetPos = pTarget->GetPos();
@@ -411,7 +412,8 @@ void CPlayerM::Collision()
 			CObject* pNext = pObj->GetNext(); // 次のポインタを取得
 			if (type == CObject::TYPE::ENEMY_X)
 			{
-				CEnemyX* pEnemy = (CEnemyX*)pObj; //ダウンキャスト
+				CEnemyX* pEnemy = static_cast<CEnemyX*>(pObj); //ダウンキャスト
+
 				D3DXVECTOR3 enemyPos = pEnemy->GetPos();
 				D3DXVECTOR3 enemySize = pEnemy->GetSize();
 				// OBB1とOBB2を初期化
@@ -440,7 +442,7 @@ void CPlayerM::Collision()
 			}
 			if (type == CObject::TYPE::BLOCK)
 			{
-				CBlockX* pBlock = (CBlockX*)pObj; //ダウンキャスト
+				CBlockX* pBlock = static_cast<CBlockX*>(pObj); //ダウンキャスト
 				D3DXVECTOR3 blockPos = pBlock->GetPos();
 				D3DXVECTOR3 blockSize = pBlock->GetSize();
 				// OBB1とOBB2を初期化
@@ -469,7 +471,8 @@ void CPlayerM::Collision()
 			}
 			if (type == CObject::TYPE::ENEMY_BULLET)
 			{
-				CBulletEnemy* pBullet = (CBulletEnemy*)pObj; //ダウンキャスト
+				CBulletEnemy* pBullet = static_cast<CBulletEnemy*>(pObj); //ダウンキャスト
+
 				D3DXVECTOR3 BulletPos = pBullet->GetPos();
 				D3DXVECTOR3 BulletSize = pBullet->GetSize();
 				// OBB1とOBB2を初期化

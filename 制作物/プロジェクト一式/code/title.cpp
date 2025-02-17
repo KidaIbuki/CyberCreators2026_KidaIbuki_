@@ -239,7 +239,8 @@ void CTitleSecond::Update()
 
 			if (type == CObject::TYPE::PLAYER_M)
 			{
-				CPlayerM* pPlayer = (CPlayerM*)pObj; //ダウンキャスト
+				CPlayerM* pPlayer = static_cast<CPlayerM*>(pObj); //ダウンキャスト
+
 				if (pPlayer != nullptr)
 				{
 
