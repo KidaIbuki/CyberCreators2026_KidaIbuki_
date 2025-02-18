@@ -309,33 +309,33 @@ void Capsule::GetEndpoints(D3DXVECTOR3& outStart, D3DXVECTOR3& outEnd) const
 //=========================================
 void Capsule::DrawCapsule(IDirect3DDevice9* device, int segments, D3DXCOLOR color) const
 {
-    std::vector<Vertex> vertices;
+    std::vector<Vertex> vertices;  // 頂点データを格納するリスト
     D3DXVECTOR3 start, end;
-    GetEndpoints(start, end);
+    GetEndpoints(start, end);  // カプセルの両端の座標を取得
 
-    // 軸方向
+   // 軸方向ベクトルの計算（カプセルの中心軸）
     D3DXVECTOR3 axis = end - start;
-    if (D3DXVec3LengthSq(&axis) < 0.0001f)
+    if (D3DXVec3LengthSq(&axis) < 0.0001f)  // 長さが極端に短い場合は描画しない
     {
         return;
     }
-    D3DXVec3Normalize(&axis, &axis);
+    D3DXVec3Normalize(&axis, &axis);  // 正規化
 
-    // 直交する基準ベクトル
+    // カプセルの軸に直交する基準ベクトルを求める
     D3DXVECTOR3 up = fabs(axis.y) < 0.99f ? D3DXVECTOR3(0, 1, 0) : D3DXVECTOR3(1, 0, 0);
     D3DXVECTOR3 right;
-    D3DXVec3Cross(&right, &up, &axis);
+    D3DXVec3Cross(&right, &up, &axis);   // right = up × axis
     D3DXVec3Normalize(&right, &right);
     D3DXVECTOR3 newUp;
-    D3DXVec3Cross(&newUp, &axis, &right);
+    D3DXVec3Cross(&newUp, &axis, &right);   // newUp = axis × right
 
-    // **円柱部分**
+    // **円柱部分の描画用頂点を生成**
     std::vector<D3DXVECTOR3> topCircle;
     std::vector<D3DXVECTOR3> bottomCircle;
 
     for (int i = 0; i < segments; ++i)
     {
-        float theta = (D3DX_PI * 2.0f * i) / segments;
+        float theta = (D3DX_PI * 2.0f * i) / segments;   // 角度を計算
         float x = cosf(theta) * radius;
         float y = sinf(theta) * radius;
         D3DXVECTOR3 circlePoint = right * x + newUp * y;
@@ -343,11 +343,12 @@ void Capsule::DrawCapsule(IDirect3DDevice9* device, int segments, D3DXCOLOR colo
         topCircle.push_back(end + circlePoint);
         bottomCircle.push_back(start + circlePoint);
 
+        // 上下の円周を結ぶ線
         vertices.push_back({ start + circlePoint, color });
         vertices.push_back({ end + circlePoint, color });
     }
 
-    // **円柱のリング**
+    // **円柱のリングを描画するための線分を追加**
     for (int i = 0; i < segments; ++i)
     {
         int next = (i + 1) % segments;
@@ -357,7 +358,7 @@ void Capsule::DrawCapsule(IDirect3DDevice9* device, int segments, D3DXCOLOR colo
         vertices.push_back({ bottomCircle[next], color });
     }
 
-    // **半球のリング**
+    // **半球の描画（上下）**
     int hemisphereSegments = segments / 2;
     for (int i = 1; i <= hemisphereSegments; ++i)
     {
@@ -375,9 +376,9 @@ void Capsule::DrawCapsule(IDirect3DDevice9* device, int segments, D3DXCOLOR colo
             float y = sinf(theta) * sinPhi * radius;
             float z = cosPhi * radius;
 
-            // **修正：z の符号を逆にする**
-            upperRing.push_back(end + right * x + newUp * y + axis * z); // 修正
-            lowerRing.push_back(start + right * x + newUp * y - axis * z); // 修正
+            // **z の符号を調整して上下の半球を形成**
+            upperRing.push_back(end + right * x + newUp * y + axis * z); 
+            lowerRing.push_back(start + right * x + newUp * y - axis * z); 
         }
 
         for (int j = 0; j < segments; ++j)
@@ -404,13 +405,18 @@ bool Capsule::CapsuleVsOBB_SAT(const OBB& obb) const
     D3DXVECTOR3 start, end;
     GetEndpoints(start, end);
 
+    // OBB の各軸を取得
     std::vector<D3DXVECTOR3> obbAxes = { obb.GetAxis(0), obb.GetAxis(1), obb.GetAxis(2) };
+
+    // カプセルの軸（線分方向）を計算
     D3DXVECTOR3 capsuleAxis = end - start;
     D3DXVec3Normalize(&capsuleAxis, &capsuleAxis);
 
+    // 衝突判定のための軸リストを作成
     std::vector<D3DXVECTOR3> testAxes = obbAxes;
     testAxes.push_back(capsuleAxis);
 
+    // OBB の軸とカプセルの軸の外積を求め、新たな分離軸を追加
     for (const auto& obbAxis : obbAxes)
     {
         D3DXVECTOR3 cross;
@@ -421,10 +427,11 @@ bool Capsule::CapsuleVsOBB_SAT(const OBB& obb) const
             testAxes.push_back(cross);
         }
     }
-
+    // OBB の頂点とカプセルの端点を取得
     std::vector<D3DXVECTOR3> obbVertices = obb.GetCorners();
     std::vector<D3DXVECTOR3> capsulePoints = { start, end };
 
+    // 各軸で投影を行い、分離しているかチェック
     for (const auto& axis : testAxes)
     {
         float minObb, maxObb, minCapsule, maxCapsule;
@@ -436,11 +443,12 @@ bool Capsule::CapsuleVsOBB_SAT(const OBB& obb) const
 
         if (!Overlaps(minObb, maxObb, minCapsule, maxCapsule))
         {
-            return false;
+            return false;  // 分離していたら衝突していない
         }
     }
 
-    return true;
+    return true;  // すべての軸で分離していなければ衝突
+
 }
 //========================================
 // 投影範囲を計算

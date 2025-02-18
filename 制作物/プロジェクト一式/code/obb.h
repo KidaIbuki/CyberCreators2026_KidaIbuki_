@@ -75,10 +75,10 @@ public:
 
 private:
 
-	D3DXVECTOR3 center;
-	float radius;
-	float height;
-	D3DXMATRIX rotationMatrix;
+	D3DXVECTOR3 center;    // カプセルの中心
+	float radius;          // 球の半径
+	float height;          // カプセルの高さ
+	D3DXMATRIX rotationMatrix;   // 回転マトリックス
 
 };
 
