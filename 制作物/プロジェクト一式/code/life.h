@@ -1,7 +1,7 @@
 //==================================
 // 
 // プレイヤーライフ クラス　life.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _LIFE_H_
@@ -28,14 +28,16 @@ private:
 	static int m_nFrame;   // フレームのカウント
 	static int m_nLife;   // ライフ
 
-	static const float TEX_HEIGHT;  // テクスチャの縦の初期値
-	static const float TEX_WIDTH;   // テクスチャの横の初期値
-	static const float TEX_SIZE_X;   // テクスチャのサイズ
-	static const float TEX_SIZE_Y;   // テクスチャのサイズ
-	static const float TEX_MOVE_H;   // テクスチャの移動
-	static const float TEX_MOVE_W;   // テクスチャの移動
 
-	static const int FRAME;         // フレーム
-	static const int LIFE;          // ライフ
+	static constexpr float TEX_HEIGHT = 0.0f;   // テクスチャの縦の初期値
+	static constexpr float TEX_WIDTH = 0.1f;    // テクスチャの横の初期値
+	static constexpr float TEX_SIZE_X = 120.0f;   // テクスチャサイズx
+	static constexpr float TEX_SIZE_Y = 350.0f;   // テクスチャサイズy
+	static constexpr float TEX_MOVE_H = 0.1f;   // テクスチャ移動height
+	static constexpr float TEX_MOVE_W = 0.1f;   // テクスチャ移動width
+
+	static constexpr int FRAME = 3;     // カウントフレーム
+	static constexpr int LIFE = 100;    // ライフ
+
 };
 #endif

@@ -1,7 +1,7 @@
 //=================================
 // 
 // ボス戦背景クラス　background.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _BACKGROUND_H_
@@ -27,9 +27,12 @@ public:
 	static void Unload();				//テクスチャのアンロード
 private:
 	static LPDIRECT3DTEXTURE9 m_pTextureTemp;						//テクスチャのテンプレート
-	static const float FIELD_X;     // フレームのカウント
-	static const float FIELD_Z;     // フレームのカウント
-	static const float MOVE_Y;     // フレームのカウント
+
+	// 背景のサイズ
+	static constexpr float FIELD_X = 100.0f;
+	static constexpr float FIELD_Z = 6000.0f;
+	// 背景の動く速度
+	static constexpr float MOVE_Y = 0.003f;
 
 
 };

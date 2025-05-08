@@ -1,7 +1,7 @@
 //=================================
 // 
 //ライトクラス　　light.cpp
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "light.h"   // ライト
@@ -27,7 +27,6 @@ CLight::~CLight()
 //==============================
 HRESULT CLight::Init()
 {
-#if 1
 	CManager* pManager = CManager::GetInstance();
 
 	LPDIRECT3DDEVICE9 pDevice;
@@ -68,7 +67,6 @@ HRESULT CLight::Init()
 	}
 	return S_OK;
 
-#endif
 }
 //==============================
 //終了処理

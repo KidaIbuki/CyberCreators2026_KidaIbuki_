@@ -1,7 +1,7 @@
 //=================================
 // 
 // 敵クラス　enemyX.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "manager.h"   // マネージャー

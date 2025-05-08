@@ -1,7 +1,7 @@
 //=================================
 // 
 // エフェクトクラス　effect.cpp
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "manager.h"    // マネージャー

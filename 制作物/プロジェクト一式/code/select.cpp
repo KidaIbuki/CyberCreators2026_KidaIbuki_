@@ -1,7 +1,7 @@
 //=================================
 // 
 // ポーズ クラス　pause.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "select.h"   // セレクト

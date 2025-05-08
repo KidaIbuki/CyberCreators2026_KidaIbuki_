@@ -1,6 +1,6 @@
 //==============================
 //
-//ポリゴン描画c++版
+//メイン処理
 // ourther kida ibuki
 //==============================
 #include "manager.h"  // マネージャー
@@ -9,7 +9,9 @@
 //グローバル宣言
 //=========================
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+//HRESULT CheckAntialias(D3DMULTISAMPLE_TYPE AntialiasMode);
 int g_nCountFPS = 0;
+//D3DPRESENT_PARAMETERS m_d3dParameters;
 
 //=========================
 //メイン関数

@@ -1,7 +1,7 @@
 //=================================
 // 
 //レンダラークラス(DirectX描画)renderer.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _RENDERER_H_
@@ -21,6 +21,8 @@ public:
 	void Draw();
 	void DrawFPS();
 	LPDIRECT3DDEVICE9 GetDevice();	//3Dデバイスの取得
+	//HRESULT CheckAntialias(D3DMULTISAMPLE_TYPE AntialiasMode);
+
 private:
 	LPDIRECT3D9 m_pD3D;		//Direct3D
 	LPDIRECT3DDEVICE9 m_pD3DDevice;		//Direct3Dデバイス

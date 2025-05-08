@@ -1,7 +1,7 @@
 //=================================
 // 
 // シーンクラス　scene.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _SCENE_H_

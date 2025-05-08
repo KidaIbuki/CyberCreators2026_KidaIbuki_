@@ -1,7 +1,7 @@
 //=================================
 // 
 // フォグクラス　　fog.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _FOG_H_
@@ -26,7 +26,7 @@ private:
 	float m_fFogEndPos;    // フォグの終了位置
 
 	static const D3DXCOLOR COL;  // フォグカラー
-	static const float DENSITY;  // 密度
+	static constexpr float DENSITY = 0.0005f;  // 密度
 };
 
 #endif

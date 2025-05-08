@@ -1,7 +1,7 @@
 //=================================
 // 
 // 弾クラス　bullet.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "manager.h"    // マネージャー
@@ -12,21 +12,9 @@
 // 静的メンバ変数を初期化
 LPDIRECT3DTEXTURE9 CBullet::m_pTextureTemp = {};
 
-const int CBullet::LIFE = 1300;
 const D3DXCOLOR CBullet::COL = D3DXCOLOR(0.7f, 0.3f, 0.0f, 1.0f);  // 色
-const float CBullet::RADIUS = 3.0f;  // 半径
-const float CBullet::SPLIT = 1.0f;  // 分割
-const int CBullet::EFFECTLIFE = 10;  // エフェクトのライフ
-const float CBullet::BILLSIZE = 3.0f;  // ビルボードサイズ
-const float CBullet::BULLETSIZE = 4.0f;  // 弾のサイズ
-
 
 const D3DXCOLOR CBulletEnemy::COL = D3DXCOLOR(0.0f, 1.0f, 1.0f, 1.0f);  // 色
-const float CBulletEnemy::RADIUS = 5.0f;  // 半径
-const float CBulletEnemy::SPLIT = 1.0f;  // 分割
-const int CBulletEnemy::EFFECTLIFE = 10;  // エフェクトのライフ
-const float CBulletEnemy::BILLSIZE = 5.0f;  // ビルボードサイズ
-const float CBulletEnemy::BULLETSIZE = 10.0f;  // 弾のサイズ
 
 //==========================================
 // コンストラクタ
@@ -55,7 +43,7 @@ HRESULT CBullet::Init()
 	SetType(CObject::TYPE::BULLET);
 	SetBillboard(BILLSIZE, BILLSIZE, BILLSIZE);
 	SetSize(D3DXVECTOR3(BULLETSIZE, BULLETSIZE, 0.0f));
-	m_dwLifeTime = timeGetTime() + LIFE;
+	m_dwLifeTime = timeGetTime() + LIFE;   // ライフ設定
 
 
 	return S_OK;
@@ -78,12 +66,12 @@ void CBullet::Update()
 		CBullet::DeathFlag();
 	}
 
-	CEffect::Create(m_pos, COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);
+	CEffect::Create(m_pos, COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);  // エフェクト生成
 
 
 
 	//CollisionBullet();
-	Collision();
+	Collision();  // 当たり判定
 
 	m_pos += m_move;
 }
@@ -175,6 +163,8 @@ void CBullet::Collision()
 			if (type == CObject::TYPE::ENEMY_X)
 			{
 				CEnemyX* pEnemy = static_cast<CEnemyX*>(pObj); //ダウンキャスト
+
+				// 敵情報取得
 				D3DXVECTOR3 enemyPos = pEnemy->GetPos();
 				D3DXVECTOR3 enemySize = pEnemy->GetSize();
 				// OBB1とOBB2を初期化
@@ -205,6 +195,8 @@ void CBullet::Collision()
 			if (type == CObject::TYPE::ENEMY_BOSS)
 			{
 				CEnemyBoss* pEnemy = static_cast<CEnemyBoss*>(pObj); //ダウンキャスト
+
+				// 敵情報取得
 				D3DXVECTOR3 enemyPos = pEnemy->GetPos();
 				D3DXVECTOR3 enemySize = pEnemy->GetSize();
 				// OBB1とOBB2を初期化
@@ -263,7 +255,7 @@ HRESULT CBulletEnemy::Init()
 	SetBillboard(BILLSIZE, BILLSIZE, BILLSIZE);
 	SetSize(D3DXVECTOR3(BULLETSIZE, BULLETSIZE, BULLETSIZE));
 
-	m_dwLifeTime = timeGetTime() + LIFE;
+	m_dwLifeTime = timeGetTime() + LIFE;  // ライフ設定
 
 
 	return S_OK;
@@ -283,11 +275,11 @@ void CBulletEnemy::Update()
 {
 
 	if (timeGetTime() >= m_dwLifeTime)
-	{
+	{// ライフがなくなったら消す
 		CBullet::m_bDeath = true;
 	}
 
-	CEffect::Create(m_pos, COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);
+	CEffect::Create(m_pos, COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);  // エフェクト生成
 
 	m_pos += m_move;
 }

@@ -1,7 +1,7 @@
 //===========================================
 // 
 // モーション[motion.h]
-// Auther:UedaKou
+// Auther:UedaKou    シェーダー部分  Kida Ibuki
 // 
 //===========================================
 #ifndef _MOTION_H_
@@ -198,6 +198,12 @@ public:
 	virtual void Update()	override; // 更新
 	virtual void Draw()		override; // 描画
 
+	// トゥーン&アウトライン用シェーダー関数
+	bool LoadEffect(LPDIRECT3DDEVICE9 device, const char* fxFile);
+	void UninitEffect();
+	void UpdateEffect(LPDIRECT3DDEVICE9 device);
+	void DrawEffect(LPDIRECT3DDEVICE9 device);
+
 
 	// 基本位置設定
 	void SetBasicX(X x) {
@@ -264,6 +270,8 @@ public:
 
 	//void SetDoMotion(bool bDoMotion) { m_bDoMotion = bDoMotion; }	// モーションするか設定
 
+	LPDIRECT3DTEXTURE9 m_pToonMap;  // トゥーンマップ
+
 private:
 
 	X m_xBasic;			// 基本位置
@@ -278,6 +286,10 @@ private:
 	CNowMotion* m_pNowMotion;	// 現在モーション
 
 	//bool m_bDoMotion;	// モーションするかどうか
+
+	LPD3DXEFFECT m_pEffect;     // シェーダー
+	std::string m_fxFilePath;             // 読み込む.fxファイルのパス
+
 };
 
 // モーション管理

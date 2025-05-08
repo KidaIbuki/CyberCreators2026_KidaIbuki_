@@ -1,7 +1,7 @@
 //=================================
 // 
 // “GƒNƒ‰ƒX@enemyX.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _ENEMYX_H_

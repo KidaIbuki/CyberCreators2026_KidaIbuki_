@@ -1,7 +1,7 @@
 //=================================
 // 
 // ボス戦背景クラス　background.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "background.h"   // バックグラウンド
@@ -9,10 +9,6 @@
 
 // 静的メンバ変数初期化
 LPDIRECT3DTEXTURE9 CBackGround::m_pTextureTemp = {};
-
-const float CBackGround::FIELD_X = 100.0f;
-const float CBackGround::FIELD_Z = 6000.0f;
-const float CBackGround::MOVE_Y = 0.003f;
 
 //===============================
 // コンストラクタ

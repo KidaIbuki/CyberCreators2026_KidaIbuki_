@@ -1,7 +1,7 @@
 //=================================
 // 
 // シーンクラス　scene.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "title.h"     // タイトル
@@ -12,17 +12,6 @@
 #include "playerM.h"  // プレイヤー
 #include "target.h"   // レティクル
 #include "ui.h"       // UI
-
-const float CTitle::UI_POS_X = 300.0f;  // UI位置
-const float CTitle::UI_POS_Y = 150.0f;
-const int CTitle::TIMECNT = 40;  // タイムのカウント
-
-
-const int CTitleSecond::TIMECNT_2 = 40;  // タイムのカウント
-
-const float CTitleSecond::TARGET_POS_Z = 150.0f;
-const float CTitleSecond::UI_POS_X_2 = 640.0f;  // UI位置
-const float CTitleSecond::UI_POS_Y_2 = 100.0f;
 
 //====================================
 // コンストラクタ

@@ -28,24 +28,23 @@ private:
 	static float m_fTexHeight;   // 縦
 	static float m_fTexWidht;    // 横
 
-	static const int FRAME;  // フレームのカウント
-	static const float REDUCE_POS;  // テクスチャ座標を減らす
-
-	static const float INITIAL_VALUE;   // 位置の初期値
-	static const float TEX_RANGE;      // テクスチャの範囲
-
+	static constexpr int FRAME = 3;  // フレームのカウント
+	static constexpr float REDUCE_POS = 0.25f;   // テクスチャ座標を減らす
+	static constexpr float INITIAL_VALUE = 0.25f;  // 位置の初期値
+	static constexpr float TEX_RANGE = 1.25f;     // テクスチャの範囲
+	
 	// テクスチャのサイズ
-	static const float TEX_SIZE_X_1;   
-	static const float TEX_SIZE_Y_1;
+	static constexpr float TEX_SIZE_X_1 = 120.0f;
+	static constexpr float TEX_SIZE_Y_1 = 50.0f;
 
-	static const float TEX_SIZE_X_2;
-	static const float TEX_SIZE_Y_2;
+	static constexpr float TEX_SIZE_X_2 = 450.0f;
+	static constexpr float TEX_SIZE_Y_2 = 250.0f;
 
-	static const float TEX_SIZE_X_3;
-	static const float TEX_SIZE_Y_3;
+	static constexpr float TEX_SIZE_X_3 = 100.0f;
+	static constexpr float TEX_SIZE_Y_3 = 100.0f;
 
-	static const float TEX_SIZE_X_4;
-	static const float TEX_SIZE_Y_4;
+	static constexpr float TEX_SIZE_X_4 = 500.0f;
+	static constexpr float TEX_SIZE_Y_4 = 300.0f;
 
 };
 #endif

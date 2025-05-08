@@ -1,7 +1,7 @@
 //=================================
 // 
 //カメラクラス　camera.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _CAMERA_H_

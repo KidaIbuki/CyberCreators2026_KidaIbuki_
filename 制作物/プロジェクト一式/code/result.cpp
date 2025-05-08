@@ -1,7 +1,7 @@
 //=================================
 // 
 // シーンクラス　result.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "result.h"   // リザルト

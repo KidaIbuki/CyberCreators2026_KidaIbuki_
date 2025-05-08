@@ -1,7 +1,7 @@
 //=================================
 // 
 // パーティクル クラス　particle.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _EXPLOSION_H_
@@ -30,11 +30,13 @@ private:
 	int m_nLife;         // ライフ
 	DWORD m_dwLifeTime;    // ライフのタイマー
 	static LPDIRECT3DTEXTURE9 m_pTextureTemp;						//テクスチャのテンプレート
-	static const int LIFE;				//ライフ
-	static const int DIVIDE;   // アニメーションの分割数
-	static const int TIME;     // アニメーションのタイプ
-	static const float SIZE_X;   // テクスチャサイズ
-	static const float SIZE_Z;   // テクスチャサイズ
+
+	static constexpr int LIFE = 1000;
+	static constexpr int DIVIDE = 8;   // 分割数
+	static constexpr int TIME = 30;    // アニメーションのタイム
+	static constexpr float SIZE_X = 10.0f;  // テクスチャサイズx
+	static constexpr float SIZE_Z = 10.0f;  // テクスチャサイズz
+
 };
 
 

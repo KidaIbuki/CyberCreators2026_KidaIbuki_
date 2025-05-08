@@ -1,7 +1,7 @@
 //=================================
 // 
 // 階層構造player　playerM.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "manager.h"     // マネージャー
@@ -9,39 +9,16 @@
 #include "target.h"    // レティクル
 #include "blockX.h"    // ブロック
 #include "ui.h"        // UI
-#include "obb.h"
-#include "effect.h"
+#include "obb.h"       // 当たり判定
+#include "effect.h"    // エフェクト
 #include "bullet.h"    // 弾
-#include "explosion.h"
+#include "explosion.h" // 爆発
 
 bool CPlayerM::m_bMove = false;
 bool CPlayerM::m_bPlayerDeath = false;
 
-const float CPlayerM::HALF2 = 0.75f;
-const float CPlayerM::HALF1 = 0.5f;
-const float CPlayerM::HALF = 0.25f;
-
-const float CPlayerM::MOVE_SPEED = 0.25f;
-
-const int CPlayerM::OVER = 190;   // 左右
-const int CPlayerM::OVER_UP = 200;  // 上
-const int CPlayerM::OVER_DOWN = 100;  // 下
-const int CPlayerM::FRAMECNT = 40;   // フレームのカウント(弾の発射間隔を変えれる)
 
 const D3DXCOLOR CPlayerM::COL = D3DXCOLOR(1.0f, 0.5f, 0.0f, 0.5f);   // エフェクトカラー
-const float CPlayerM::RADIUS = 3.0f;   // 半径
-const float CPlayerM::SPLIT = 1.0f;    // 分割
-const int CPlayerM::EFFECTLIFE = 5;   // エフェクトライフ
-
-const float CPlayerM::MOVE_PALYER = 4.0f;   // プレイヤーの移動量
-const float CPlayerM::MOVE_PALYER_Z = 2.0f;   // プレイヤーの死んだときの移動量
-const float CPlayerM::MOVE_PALYER_Y = 1.0f;   // プレイヤーの死んだときの移動量
-
-const int CPlayerM::SHAKE_FRAME = 30;   // 画面の揺れのフレーム
-const int CPlayerM::SHAKE_VOLUME_DEATH = 3;   // 死んだとときの揺れの強さ
-const int CPlayerM::SHAKE_VOLUME = 10;   // ダメージを受けたときの揺れの強さ
-const int CPlayerM::LIFE_REDUCE = 10;   // ライフを減らす数
-
 //===============================
 // コンストラクタ
 //===============================
@@ -95,10 +72,9 @@ void CPlayerM::Update()
 	D3DXVECTOR3 pos = GetPos();
 	D3DXVECTOR3 rot = GetRot();
 
-	//SetMotion(1);
 	// モデルに操作を付ける
 	if (m_bMove == true)
-	{
+	{// 生きてるとき
 		// 移動量の更新
 		m_move += PlayerMove();
 		// posを動かす
@@ -110,27 +86,28 @@ void CPlayerM::Update()
 		//奥に動かす。
 		pos.z += MOVE_PALYER;
 
+		// エフェクト生成
 		CEffect::Create(D3DXVECTOR3(pos.x, pos.y, pos.z - 25.0f), COL, 0, RADIUS, SPLIT, 0.0f, EFFECTLIFE);
 
 
 	}
 	if (m_bPlayerDeath == true)
-	{
+	{// 死んだときの動き
 		pos.y -= MOVE_PALYER_Y;
 		pos.z += MOVE_PALYER_Z;
 		pManager->GetInstance()->GetCamera()->SetShake(SHAKE_FRAME, SHAKE_VOLUME_DEATH);   // 画面の揺れ
 
 		m_nDeathCnt--;
 		if (m_nDeathCnt <= 0)
-		{
-			CExplosion::Create(pos, D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f));
+		{// 一定時間たったら
+			CExplosion::Create(pos, D3DXVECTOR3(-D3DX_PI * 0.5f, 0.0f, 0.0f));  // 爆発生成
 
-			DeathFlag();
+			DeathFlag();  // オブジェクトを消す
 
-			m_bPlayerDeath = false;
-			pManager->GetSound()->PlaySoundA(CSound::SOUND_LABEL::SOUND_LABEL_SE_EXPLOSION);
+			m_bPlayerDeath = false;  // 状態を戻す
+			pManager->GetSound()->PlaySoundA(CSound::SOUND_LABEL::SOUND_LABEL_SE_EXPLOSION);  // サウンド
 
-			CFade::SetFade(CScene::MODE::MODE_GAME);
+			CFade::SetFade(CScene::MODE::MODE_GAME);  // リスタート
 		}
 	}
 	else // 死んでないとき
@@ -193,8 +170,7 @@ void CPlayerM::Update()
 								D3DXVec3Normalize(&bulletAngle, &bulletAngle);   // 長さが1になる
 
 								CBullet::Create(pos, bulletAngle * 10.0f);
-								// MEMO targetのposがずれているか、bulletのmoveがおかしいか
-								// xとyの値が倍になってる
+
 								m_type = BULLET_SHOT;
 
 							}
@@ -274,7 +250,6 @@ D3DXVECTOR3 CPlayerM::PlayerMove()
 			{
 				move.x -= sinf(rotC.y - D3DX_PI * HALF2) * MOVE_SPEED;
 				move.y -= cosf(rotC.y - D3DX_PI * HALF2) * MOVE_SPEED;
-				//rot.y = D3DX_PI * -HALF2 - rot.y;
 			}
 			else if (pKeyboard->GetPress(DIK_D) && pKeyboard->GetPress(DIK_S) ||
 				pJoypad->GetJoypadPress(pJoypad->JOYKEY_RIGHT) && pJoypad->GetJoypadPress(pJoypad->JOYKEY_DOWN))
@@ -414,6 +389,7 @@ void CPlayerM::Collision()
 			{
 				CEnemyX* pEnemy = static_cast<CEnemyX*>(pObj); //ダウンキャスト
 
+				// 敵の情報取得
 				D3DXVECTOR3 enemyPos = pEnemy->GetPos();
 				D3DXVECTOR3 enemySize = pEnemy->GetSize();
 				// OBB1とOBB2を初期化
@@ -443,6 +419,8 @@ void CPlayerM::Collision()
 			if (type == CObject::TYPE::BLOCK)
 			{
 				CBlockX* pBlock = static_cast<CBlockX*>(pObj); //ダウンキャスト
+
+				// ブロックの情報取得
 				D3DXVECTOR3 blockPos = pBlock->GetPos();
 				D3DXVECTOR3 blockSize = pBlock->GetSize();
 				// OBB1とOBB2を初期化
@@ -473,6 +451,7 @@ void CPlayerM::Collision()
 			{
 				CBulletEnemy* pBullet = static_cast<CBulletEnemy*>(pObj); //ダウンキャスト
 
+				// 弾の情報取得
 				D3DXVECTOR3 BulletPos = pBullet->GetPos();
 				D3DXVECTOR3 BulletSize = pBullet->GetSize();
 				// OBB1とOBB2を初期化

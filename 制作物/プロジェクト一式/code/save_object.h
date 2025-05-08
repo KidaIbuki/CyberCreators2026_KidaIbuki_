@@ -1,7 +1,7 @@
 //=================================
 // 
 // オブジェクト保存 クラス　save_object.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _SAVE_OBJECT_H_

@@ -1,7 +1,7 @@
 //=================================
 // 
 // エフェクトクラス　effect.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _EFFECT_H_

@@ -1,7 +1,7 @@
 //================================
 //
 //xファイルでブロック(blockX.h)
-//outher kida ibuki
+//Auther kida ibuki
 //================================
 #ifndef _BLOCKX_H_
 #define _BLOCKX_H_

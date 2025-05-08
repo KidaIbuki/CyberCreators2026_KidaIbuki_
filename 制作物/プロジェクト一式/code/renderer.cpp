@@ -1,7 +1,7 @@
 //=================================
 // 
 //レンダラークラス(DirectX描画)renderer.cpp
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "renderer.h"   // レンダラー
@@ -36,6 +36,7 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 {
 	D3DDISPLAYMODE d3ddm;		//ディスプレイモード
 	D3DPRESENT_PARAMETERS d3dpp;//プレゼンテーションパラメータ
+	HRESULT hr;
 
 	//DirectXオブジェクトの生成
 	m_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
@@ -62,6 +63,10 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	d3dpp.Windowed = bWindow;				//ウィンドウモード
 	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;//リフレッシュレート
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;//インターバル
+	d3dpp.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES;    // アンチエイリアス有効化
+
+	////D3DPRESENT_PARAMETERS構造体に設定した内容でアンチエイリアシングが使用可能かチェックする。
+	//hr = CheckAntialias(D3DMULTISAMPLE_16_SAMPLES);
 
 	//DIrectXデバイスの生成（描画処理と頂点処理をハードウェアで行う）
 	if (FAILED(m_pD3D->CreateDevice(D3DADAPTER_DEFAULT,
@@ -91,6 +96,15 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 			}
 		}
 	}
+	////アンチエイリアシングが使用可能なときはレンダーステートのアンチエイリアシングを有効にする。
+	//if (SUCCEEDED(hr))
+	//{
+	//	m_pD3DDevice->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, TRUE);
+	//}
+	//else
+	//{
+	//	m_pD3DDevice->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, FALSE);
+	//}
 
 	//デバック表示用フォントの生成
 	D3DXCreateFont(m_pD3DDevice, 18, 0, 0, 0,
@@ -209,3 +223,57 @@ LPDIRECT3DDEVICE9 CRenderer::GetDevice()
 	return m_pD3DDevice;
 
 }
+
+#if 0
+HRESULT CRenderer::CheckAntialias(D3DMULTISAMPLE_TYPE AntialiasMode)
+{
+	HRESULT hr = E_FAIL;
+	DWORD QualityBackBuffer = 0;
+	DWORD QualityZBuffer = 0;
+	DWORD m = (DWORD)AntialiasMode;
+	D3DPRESENT_PARAMETERS d3dpp;//プレゼンテーションパラメータ
+
+
+	//デバイスのプレゼンテーションパラメータの設定
+	ZeroMemory(&d3dpp, sizeof(d3dpp));		//パラメータのゼロクリア
+
+	while (m)
+	{
+		//レンダリングターゲットでアンチエイリアシングがサポートされているかをチェック
+		hr = m_pD3D->CheckDeviceMultiSampleType(D3DADAPTER_DEFAULT,
+			D3DDEVTYPE_HAL,
+			d3dpp.BackBufferFormat,
+			d3dpp.Windowed,
+			(D3DMULTISAMPLE_TYPE)m,
+			&QualityBackBuffer);
+		if (SUCCEEDED(hr))
+		{
+			//深度ステンシル サーフェイスでアンチエイリアシングがサポートされているかをチェック
+			hr = m_pD3D->CheckDeviceMultiSampleType(D3DADAPTER_DEFAULT,
+				D3DDEVTYPE_HAL,
+				d3dpp.AutoDepthStencilFormat,
+				d3dpp.Windowed,
+				(D3DMULTISAMPLE_TYPE)m,
+				&QualityZBuffer);
+			if (SUCCEEDED(hr))
+			{
+				//アンチエイリアシングが使用できるのでD3DPRESENT_PARAMETERSにタイプをセットする。
+				d3dpp.MultiSampleType = (D3DMULTISAMPLE_TYPE)m;
+
+				//QualityBackBufferとQualityZBufferで小さい方の値を有効にする。どんなパターンで値が返るのかわからんので、こうしたほうが安全かと。
+				if (QualityBackBuffer < QualityZBuffer)
+					d3dpp.MultiSampleQuality = QualityBackBuffer - 1;
+				else
+					d3dpp.MultiSampleQuality = QualityZBuffer - 1;
+
+				break;
+			}
+		}
+
+		//現在のタイプでアンチエイリアシングが使用できないので、１段階低いタイプで再チェックする。
+		m--;
+	}
+
+	return hr;
+}
+#endif

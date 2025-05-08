@@ -1,7 +1,7 @@
 //=================================
 // 
 //カメラクラス　camera.cpp
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "camera.h"   // カメラ

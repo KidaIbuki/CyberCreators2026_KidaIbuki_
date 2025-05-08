@@ -57,40 +57,39 @@ private:
 	D3DXVECTOR3 m_collitionSize;   // 当たり判定用のサイズ
 	BULLET_TYPE m_type;         // 弾の状態
 	STATE m_state;              // プレイヤーの状態
-	float m_fAngle;				// 向き
 	int m_nFrameCnt;            // 弾のフレームカウント 
-	int m_nLife;                // プレイヤーのライフ
 
-	int m_nDamegeCnt;                 // ダメージのカウント
 	int m_nDeathCnt;           // どれくらいで死ぬかカウント
 	int m_nSceneCnt;           // 画面遷移する時間
 	static bool m_bMove;          // 動いたかどうか
 	static bool m_bPlayerDeath;         // 死んだかどうか
 
 	//**=================c++版マクロ====================**
-	static const float HALF2;				//3.14の半分の２等分
-	static const float HALF1;				//3.14の半分の３等分
-	static const float HALF;				//上の半分
-	static const float MOVE_SPEED;			//移動の速度
-	static const int OVER;         // 左右の上限
-	static const int OVER_UP;      // 上の上限
-	static const int OVER_DOWN;    // 下の上限
-	static const int FRAMECNT;     // フレームのカウント
+	static constexpr  float HALF2 = 0.75f;        //3.14の半分の２等分
+	static constexpr  float HALF1 = 0.5f;		  //3.14の半分の３等分
+	static constexpr  float HALF = 0.25f;		  //上の半分
+	static constexpr  float MOVE_SPEED = 0.25f;   	//移動の速度
+
+	static constexpr  int OVER = 190;   // 左右
+	static constexpr  int OVER_UP = 200;  // 上
+	static constexpr  int OVER_DOWN = 100;  // 下
+	static constexpr  int FRAMECNT = 40;   // フレームのカウント(弾の発射間隔を変えれる)
 
 	static const D3DXCOLOR COL;   // 色
-	static const float RADIUS;    // 半径
-	static const float SPLIT;     // 分割
-	static const int EFFECTLIFE;  // エフェクトライフ
 
-	static const float MOVE_PALYER;  // プレイヤーの移動量
-	static const float MOVE_PALYER_Z;  // プレイヤーの死んだときの移動量
-	static const float MOVE_PALYER_Y;  // プレイヤーの死んだときの移動量
+	static constexpr float RADIUS = 3.0f;   // 半径
+	static constexpr float SPLIT = 1.0f;    // 分割
+	static constexpr int EFFECTLIFE = 5;   // エフェクトライフ
 
-	static const int SHAKE_FRAME;    // 画面の揺れのフレーム
-	static const int SHAKE_VOLUME_DEATH;  // 画面の揺れの強さ(死んだときの)
-	static const int SHAKE_VOLUME;        // ダメージを受けたときの揺れの強さ
+	static constexpr float MOVE_PALYER = 4.0f;   // プレイヤーの移動量
+	static constexpr float MOVE_PALYER_Z = 2.0f;   // プレイヤーの死んだときの移動量
+	static constexpr float MOVE_PALYER_Y = 1.0f;   // プレイヤーの死んだときの移動量
 
-	static const int LIFE_REDUCE;    // ライフを減らす数
+	static constexpr int SHAKE_FRAME = 30;   // 画面の揺れのフレーム
+	static constexpr int SHAKE_VOLUME_DEATH = 3;   // 死んだとときの揺れの強さ
+	static constexpr int SHAKE_VOLUME = 10;   // ダメージを受けたときの揺れの強さ
+	static constexpr int LIFE_REDUCE = 10;   // ライフを減らす数
+
 };
 
 #endif

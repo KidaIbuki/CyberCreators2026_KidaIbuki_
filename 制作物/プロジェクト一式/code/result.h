@@ -1,7 +1,7 @@
 //=================================
 // 
 // リザルトクラス　result.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _RESULT_H_

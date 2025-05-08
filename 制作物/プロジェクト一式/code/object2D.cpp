@@ -1,7 +1,7 @@
 //=================================
 // 
 // オブジェクト2Dクラス　object2D.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "object2D.h"   // オブジェクト2D

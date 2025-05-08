@@ -1,7 +1,7 @@
 //==================================
 // 
 // プレイヤーライフ クラス　life.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "life.h"  // ライフ
@@ -12,16 +12,6 @@ float CLife::m_fTexHeight = 0;
 float CLife::m_fTexWidth = 0;
 int CLife::m_nFrame = 0;
 int CLife::m_nLife = 0;
-
-const float CLife::TEX_HEIGHT = 0.0f;   // テクスチャの縦の初期値
-const float CLife::TEX_WIDTH = 0.1f;    // テクスチャの横の初期値
-const float CLife::TEX_SIZE_X = 120.0f;   // テクスチャサイズx
-const float CLife::TEX_SIZE_Y = 350.0f;   // テクスチャサイズy
-const float CLife::TEX_MOVE_H = 0.1f;   // テクスチャ移動height
-const float CLife::TEX_MOVE_W = 0.1f;   // テクスチャ移動width
-
-const int CLife::FRAME = 3;     // カウントフレーム
-const int CLife::LIFE = 100;    // ライフ
 
 //=======================================
 // コンストラクタ

@@ -1,7 +1,7 @@
 //=================================
 // 
 //ライトクラス　　light.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _LIGHT_H_

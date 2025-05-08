@@ -1,7 +1,7 @@
 //=================================
 // 
 // 照準クラス　target.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 
@@ -10,25 +10,12 @@
 #include "playerM.h"  // プレイヤー
 #include "manager.h"    // マネージャー
 #include "ui.h"
-const float CTarget::LEFT = 250.0f;  // 各方向の移動の最大値
-const float CTarget::RIGHT = 250.0f;
-const float CTarget::UP = 100.0f;
-const float CTarget::DOWN = 170.0f;
-
-const float CTarget::BILLSIZE_X = 20.0f;   // 各ビルボードサイズ
-const float CTarget::BILLSIZE_Y = 40.0f;
-const float CTarget::BILLSIZE_Z = 20.0f;
 
 // カラーのマクロ
 const D3DXCOLOR CTarget::INIT_COLOR = D3DXCOLOR(0.0f, 0.5f, 0.2f, 1.0f);
 const D3DXCOLOR CTarget::CHANGE_COLOR = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
 const D3DXCOLOR CTarget::CHANGE_COLOR_ELSE = D3DXCOLOR(0.0f, 0.5f, 0.2f, 1.0f);
 
-// スティックの移動量
-const float CTarget::STICK_MOVE_X = 0.0001f;
-const float CTarget::STICK_MOVE_Y = 0.0001f;
-
-const float CTarget::POS_DISTANS = 150.0f;  // posからどれくらい離すか
 
 //==========================================
 // コンストラクタ

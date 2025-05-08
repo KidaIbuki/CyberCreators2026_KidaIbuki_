@@ -1,7 +1,7 @@
 //=================================
 // 
 // オブジェクト保存 クラス　save_object.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "save_object.h"  // セーブオブジェクト

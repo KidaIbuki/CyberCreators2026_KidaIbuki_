@@ -1,7 +1,7 @@
 //==============================================
 // 
 //オブジェクト(xファイルの読み込み)　objectX.cpp
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==============================================
 #include "objectX.h"    // オブジェクトX
@@ -167,6 +167,89 @@ void CObjectX::SizeVtx()
 		//**=========================================================**
 		m_size = m_nMaxVtx - m_nMinVtx;
 	}
+}
+//==========================================
+// シェーダー適応モデルの読み込み
+//==========================================
+void CObjectX::LoadXModel(LPDIRECT3DDEVICE9 device, const char* filename)
+{
+	// 隣接情報を受け取るバッファ
+	LPD3DXBUFFER pAdjacency = nullptr;
+
+	// マテリアルバッファが存在する場合は解放）
+	if (m_pBuffMat) {
+		m_pBuffMat->Release();
+		m_pBuffMat = nullptr;
+	}
+
+	// Xファイルからメッシュを読み込む
+	HRESULT hr = D3DXLoadMeshFromX(
+		filename,             // 読み込むXファイル名
+		D3DXMESH_MANAGED,     // メッシュのメモリ管理方法
+		device,               // Direct3Dデバイス
+		&pAdjacency,          // 隣接情報
+		&m_pBuffMat,          // マテリアル情報バッファ）
+		nullptr,              // エフェクト情報
+		&m_dwNumMat,          // 読み込まれたマテリアル数
+		&m_pMesh              // メッシュオブジェクト
+	);
+
+	// メッシュの読み込みに失敗した場合、エラーメッセージを出して終了
+	if (FAILED(hr)) {
+		MessageBoxA(nullptr, "モデル読み込み失敗", "Error", MB_OK);
+		return;
+	}
+
+	// テクスチャ数の上限を超えないように制限
+	if (m_dwNumMat > MAX_TEX_X) m_dwNumMat = MAX_TEX_X;
+
+	// 読み込んだマテリアルバッファをD3DXMATERIAL構造体の配列として扱う
+	D3DXMATERIAL* pMaterials = (D3DXMATERIAL*)m_pBuffMat->GetBufferPointer();
+
+	// 独自のマテリアル配列にコピー用の配列を確保
+	m_pMaterials = new D3DMATERIAL9[m_dwNumMat];
+
+	// テクスチャ配列のポインタを事前にすべてnullptrで初期化
+	for (DWORD i = 0; i < MAX_TEX_X; i++) {
+		m_pTexture[i] = nullptr;
+	}
+
+	// マテリアルとテクスチャの設定
+	for (DWORD i = 0; i < m_dwNumMat; i++) {
+		m_pMaterials[i] = pMaterials[i].MatD3D;               // マテリアルのコピー
+		m_pMaterials[i].Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+		m_pMaterials[i].Ambient = m_pMaterials[i].Diffuse;    // 環境光を拡散光と同じに設定
+
+		// テクスチャファイル名が設定されている場合は読み込む
+		if (pMaterials[i].pTextureFilename) {
+			HRESULT texHr = D3DXCreateTextureFromFileA(
+				device,
+				pMaterials[i].pTextureFilename,
+				&m_pTexture[i]
+			);
+			// テクスチャの読み込みに失敗した場合はエラー表示
+			if (FAILED(texHr)) {
+				char buf[256];
+				sprintf_s(buf, "テクスチャ読み込み失敗: %s", pMaterials[i].pTextureFilename);
+				MessageBoxA(NULL, buf, "ERROR", MB_OK);
+			}
+		}
+	}
+	// 法線が無い場合に備えて、再計算しておく
+	if (!(m_pMesh->GetFVF() & D3DFVF_NORMAL)) {
+		HRESULT normHr = m_pMesh->CloneMeshFVF(
+			m_pMesh->GetOptions(),
+			m_pMesh->GetFVF() | D3DFVF_NORMAL,
+			device,
+			&m_pMesh
+		);
+		if (SUCCEEDED(normHr)) {
+			D3DXComputeNormals(m_pMesh, nullptr);
+		}
+	}
+	// 隣接情報バッファの解放
+	if (pAdjacency) pAdjacency->Release();
+
 }
 
 //==================================================

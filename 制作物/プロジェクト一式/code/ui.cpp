@@ -11,23 +11,6 @@ float CUi::m_fTexHeight = 0;
 float CUi::m_fTexWidht = 0;
 int CUi::m_nFrame = 0;
 
-const int CUi::FRAME = 3;
-const float CUi::REDUCE_POS = 0.25f;
-const float CUi::INITIAL_VALUE = 0.25f;
-const float CUi::TEX_RANGE = 1.25f;
-
-const float CUi::TEX_SIZE_X_1 = 120.0f;
-const float CUi::TEX_SIZE_Y_1 = 50.0f;
-
-const float CUi::TEX_SIZE_X_2 = 450.0f;
-const float CUi::TEX_SIZE_Y_2 = 250.0f;
-
-const float CUi::TEX_SIZE_X_3 = 100.0f;
-const float CUi::TEX_SIZE_Y_3 = 100.0f;
-
-const float CUi::TEX_SIZE_X_4 = 500.0f;
-const float CUi::TEX_SIZE_Y_4 = 300.0f;
-
 //====================================
 // コンストラクタ
 //====================================

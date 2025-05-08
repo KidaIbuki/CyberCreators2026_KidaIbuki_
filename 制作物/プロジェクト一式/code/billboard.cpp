@@ -1,7 +1,7 @@
 //=================================
 // 
 // ビルボードクラス　billboard.cpp
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "billboard.h"  // ビルボード

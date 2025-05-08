@@ -1,7 +1,7 @@
 //=================================
 // 
 // ビルボードクラス　object3D.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _BILLBOARD_H_

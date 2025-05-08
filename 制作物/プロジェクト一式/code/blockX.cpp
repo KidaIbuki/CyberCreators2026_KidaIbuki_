@@ -1,7 +1,7 @@
 //================================
 //
 //xファイルでブロック(blockX.h)
-//outher kida ibuki
+//Auther kida ibuki
 //================================
 #include "blockX.h"   // ブロック
 #include "manager.h"    // マネージャー

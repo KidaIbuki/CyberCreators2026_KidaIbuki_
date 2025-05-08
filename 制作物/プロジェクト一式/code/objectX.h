@@ -1,7 +1,7 @@
 //==============================================
 // 
 //オブジェクト(xファイルの読み込み)　objectX.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==============================================
 #ifndef _OBJECTX_H_
@@ -29,11 +29,13 @@ public:
 	void Update() override;		//更新処理
 	void Draw() override;		//描画処理
 
-	void DrawFrame(LPDIRECT3DDEVICE9 pDevice);
 	//**=================各生成の処理==================**
 	static CObjectX* Create();		//オブジェクトの生成
 	void SetModel(std::string sPath);		//モデルのセット
 	void SizeVtx();						// オブジェクトのサイズの最大最小を求める
+
+	void LoadXModel(LPDIRECT3DDEVICE9 device, const char* filename);  // シェーダーを適応させたいモデル読み込み
+
 	//**===============各設定の取得======================**
 	D3DXVECTOR3 GetPos() { return m_pos; }			//位置の取得
 	D3DXVECTOR3 GetSize() { return m_size; }		//サイズの取得
@@ -64,6 +66,7 @@ protected:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;			//頂点バッファ
 	//LPDIRECT3DTEXTURE9 m_pTexture;				//テクスチャ
 	LPDIRECT3DTEXTURE9 m_pTexture[MAX_TEX_X];				//テクスチャ
+	D3DMATERIAL9* m_pMaterials;
 
 private:
 

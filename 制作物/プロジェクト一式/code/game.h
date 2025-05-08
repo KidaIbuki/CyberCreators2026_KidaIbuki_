@@ -1,7 +1,7 @@
 //=================================
 // 
 // ゲーム処理クラス　gaem.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _GAME_H_
@@ -49,30 +49,32 @@ private:
     int m_nCntCreateMap;    // マップの生成カウント
     int m_nCntCreateMap1;    // マップの生成カウント
 
-    static const float LIFEPOS_X;  // ライフ位置
-    static const float LIFEPOS_Y;  // ライフ位置
-    static const float UIPOS_X;  // UI位置
-    static const float UIPOS_Y;  // UI位置
-    static const int FRAMETIME;  // フレームのタイム
+    static constexpr float LIFEPOS_X = 1200.0f;    // ライフ位置
+    static constexpr float LIFEPOS_Y = 520.0f;    // ライフ位置
+    static constexpr float UIPOS_X = 1200.0f;    // UI位置
+    static constexpr float UIPOS_Y = 320.0f;    // UI位置
+    static constexpr int FRAMETIME = 20;       // フレームのタイム
 
-    static const float PAUSEPOS_FOR;  // ポーズ位置を複数にする
-    static const float PAUSEPOS_Y;  // ポーズ位置
-    static const float PAUSESIZE_X;  // ポーズサイズ
-    static const float PAUSESIZE_Y;  // ポーズサイズ
-    static const float LEAVE;    // ブロックの離す距離
+    static constexpr float PAUSEPOS_FOR = 80.0f;    // ポーズ位置を複数にする
+    static constexpr float PAUSEPOS_Y = 300.0f;    // ポーズ位置
+    static constexpr float PAUSESIZE_X = 200.0f;   // ポーズサイズ
+    static constexpr float PAUSESIZE_Y = 50.0f;    // ポーズサイズ
 
-    static const float BOSSPOS_X;  // ボスの出現位置
-    static const float BGPOS_X_1;  // BGの位置1
-    static const float BGPOS_Y_1;  // BGの位置1
-    static const float BGPOS_Z_1;  // BGの位置1
-    static const float BGPOS_Z_2;  // BGの位置1
+    static constexpr float LEAVE = 810.0f;    // ポーズサイズ
 
-    static const float BLOCKPOS_X_1; // ブロックの位置x
-    static const float BLOCKPOS_X_2; // ブロックの位置x
+    static constexpr float BGPOS_X_1 = 350.0f;   // ボスの位置
+    static constexpr float BGPOS_Y_1 = 175.0f;	 // ボスの位置
+    static constexpr float BGPOS_Z_1 = 7000.0f;	 // ボスの位置
+    static constexpr float BGPOS_Z_2 = 13000.0f; // ボスの位置
 
-    static const float BLOCKPOS_Y_1; // ブロックの位置y
-    static const float BLOCKPOS_Y_2; // ブロックの位置y
-    static const float BLOCK_DIVITE;  // ブロックの複数
+    static constexpr float BOSSPOS_X = 200.0f;
+
+    static constexpr float BLOCKPOS_X_1 = 170.0f;  // ブロックの位置
+    static constexpr float BLOCKPOS_X_2 = 340.0f;  // ブロックの位置
+    static constexpr float BLOCKPOS_Y_1 = 280.0f;  // ブロックの位置
+    static constexpr float BLOCKPOS_Y_2 = 140.0f;  // ブロックの位置
+    static constexpr float BLOCK_DIVITE = 330.0f;  // ブロックを離しておく
+
 };
 
 #endif

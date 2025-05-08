@@ -1,7 +1,7 @@
 //=================================
 // 
 // タイトルクラス　title.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _TITLE_H_
@@ -54,9 +54,9 @@ private:
     MODEL_FILENAME m_gModelData[NUM_OBJECT_NUM];
 
     // UIの位置
-    static const float UI_POS_X;
-    static const float UI_POS_Y;
-    static const int TIMECNT;
+    static constexpr float UI_POS_X = 300.0f;  // UI位置
+    static constexpr float UI_POS_Y = 150.0f;
+    static constexpr int TIMECNT = 40;  // タイムのカウント
 
 };
 
@@ -101,11 +101,11 @@ private:
     POSITION m_Position;
     int m_nFrame;       // ボス出現のフレーム
 
-    static const int TIMECNT_2;
-    static const float TARGET_POS_Z;
-    static const float UI_POS_X_2;
-    static const float UI_POS_Y_2;
+    static constexpr int TIMECNT_2 = 40;  // タイムのカウント
 
+    static constexpr float TARGET_POS_Z = 150.0f;
+    static constexpr float UI_POS_X_2 = 640.0f;  // UI位置
+    static constexpr float UI_POS_Y_2 = 100.0f;
 
 
 };

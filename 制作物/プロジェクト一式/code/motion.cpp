@@ -1,7 +1,7 @@
 //===========================================
 // 
 // モーション[motion.cpp]
-// Auther:UedaKou
+// Auther:UedaKou  シェーダー部分 KidaIbuki
 // 
 //===========================================
 #include "motion.h"
@@ -191,6 +191,7 @@ HRESULT CParts::Init()
 //============================================
 void CParts::Uninit()
 {
+	UninitEffect();  // エフェクトの破棄
 	CObjectX::Uninit();
 }
 //============================================
@@ -198,6 +199,11 @@ void CParts::Uninit()
 //============================================
 void CParts::Update()
 {
+	CManager* pManager = CManager::GetInstance();
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = pManager->GetRenderer()->GetDevice();
+	UpdateEffect(pDevice);  // シェーダーの更新
+
 	// 動きを加算
 	m_xOffset.pos += m_xMove.pos;
 	m_xOffset.rot += m_xMove.rot;
@@ -252,6 +258,8 @@ void CParts::Draw()
 
 	SetWorldMatrix(mtxWorld);
 
+	DrawEffect(pDevice);   // シェーダーの描画
+
 	// ワールドマトリクスの設定
 	pDevice->SetTransform(D3DTS_WORLD, &mtxWorld);
 
@@ -283,13 +291,184 @@ void CParts::Draw()
 
 #endif // 0
 }
+//=======================================
+// シェーダーの読み込み
+//=======================================
+bool CParts::LoadEffect(LPDIRECT3DDEVICE9 device, const char* fxFile)
+{
+	m_fxFilePath = fxFile; // パス保存
+
+	LPD3DXBUFFER pErr = nullptr;
+#ifdef _DEBUG
+	// デバック時
+	HRESULT hr = D3DXCreateEffectFromFileA(
+		device, fxFile, nullptr, nullptr, D3DXSHADER_DEBUG, nullptr, &m_pEffect, &pErr);
+#else	
+	// リリース時
+	HRESULT hr = D3DXCreateEffectFromFileA(
+		device, fxFile, nullptr, nullptr, D3DXSHADER_OPTIMIZATION_LEVEL3, nullptr, &m_pEffect, &pErr);
+#endif	
+	if (FAILED(hr))
+	{
+		if (pErr)
+		{
+			MessageBoxA(nullptr, (char*)pErr->GetBufferPointer(), "FX Compile Error", MB_OK);
+			pErr->Release();
+		}
+		return false;
+	}
+	// トゥーンマップ読み込み
+	if (FAILED(D3DXCreateTextureFromFileA(device, "data/TEXTURE/ToonMap.png", &m_pToonMap)))
+	{
+		MessageBoxA(nullptr, "ToonMap.png の読み込みに失敗しました", "Error", MB_OK);
+		return false;
+	}
+
+	return true;
+}
+//=======================================
+// エフェクトの破棄
+//=======================================
+void CParts::UninitEffect()
+{
+	if (m_pEffect)
+	{
+		m_pEffect->Release();
+		m_pEffect = nullptr;
+	}
+	if (m_pToonMap)
+	{
+		m_pToonMap->Release();
+		m_pToonMap = nullptr;
+	}
+
+
+}
+//=======================================
+// シェーダーの更新
+//=======================================
+void CParts::UpdateEffect(LPDIRECT3DDEVICE9 device)
+{
+	D3DXMATRIX world, view, proj, wvp;
+	world = GetWorldMatrix();
+
+	// ワールド行列：回転など加える（※先に作る）
+	D3DXMatrixRotationY(&world, timeGetTime() / 1000.0f);
+
+	// ビュー行列
+	D3DXVECTOR3 eye(0, 2, -5), at(0, 0, 0), up(0, 1, 0);
+	D3DXMatrixLookAtLH(&view, &eye, &at, &up);
+
+	// 射影行列
+	D3DXMatrixPerspectiveFovLH(&proj, D3DX_PI / 4, 800.0f / 600.0f, 0.1f, 100.0f);
+
+	// ワールドビュー射影合成
+	wvp = world * view * proj;
+
+	// シェーダへ設定
+	m_pEffect->SetMatrix("World", &world);
+	m_pEffect->SetMatrix("View", &view);
+	m_pEffect->SetMatrix("Projection", &proj);
+	m_pEffect->SetMatrix("WorldViewProj", &wvp);
+
+	// 法線変換用の逆転置行列を作成
+	D3DXMATRIX worldInvTrans;
+	D3DXMatrixInverse(&worldInvTrans, NULL, &world);
+	D3DXMatrixTranspose(&worldInvTrans, &worldInvTrans);
+	m_pEffect->SetMatrix("gWorldInverseTranspose", &worldInvTrans);
+
+}
+//=======================================
+// シェーダーの描画
+//=======================================
+void CParts::DrawEffect(LPDIRECT3DDEVICE9 device)
+{
+	D3DXMATRIX view, proj, wvp;
+	D3DXMATRIX mtxWorld = GetWorldMatrix();
+	D3DXMATRIX matWorldNoScale, matWorldInvTrans;
+
+	device->GetTransform(D3DTS_VIEW, &view);
+	device->GetTransform(D3DTS_PROJECTION, &proj);
+	wvp = mtxWorld * view * proj;
+
+	// エフェクトに変数を渡す(この4つの位置を変えるとおかしくなるよ)
+	m_pEffect->SetMatrix("World", &mtxWorld);
+	m_pEffect->SetMatrix("View", &view);
+	m_pEffect->SetMatrix("Projection", &proj);
+	m_pEffect->SetMatrix("WorldViewProj", &wvp);
+
+	// エフェクト設定用スケール・回転・平行移動
+	D3DXVECTOR3 scale, translation;
+	D3DXQUATERNION rotation;
+
+	// モデル行列（World）
+	D3DXMatrixIdentity(&mtxWorld); // 回転・移動が入る
+
+	D3DXVECTOR3 eye(0, 2, -5), at(0, 0, 0), up(0, 1, 0);
+
+	// ビュー・プロジェクション行列（固定 or カメラから生成）
+	D3DXMatrixLookAtLH(&view,
+		&eye,  // Eye
+		&at,   // LookAt
+		&up);  // Up
+
+	// 射影行列
+	D3DXMatrixPerspectiveFovLH(&proj, D3DX_PI / 4, 640.0f / 480.0f, 1.0f, 100.0f);
+
+	D3DXVECTOR3 Scaling = D3DXVECTOR3(1, 1, 1);  // スケール
+
+	// 法線変換用：Worldのスケーリングを除外して逆転置行列を作成
+	D3DXMatrixInverse(&matWorldInvTrans, NULL, &mtxWorld);
+	D3DXMatrixTranspose(&matWorldInvTrans, &matWorldInvTrans);
+
+	m_pEffect->SetMatrix("gWorldInverseTranspose", &matWorldInvTrans);  // 除外したスケーリングをエフェクトに入れる
+
+	UINT numPasses = 0;
+
+	// --- アウトライン描画（先に） ---
+	m_pEffect->SetTechnique("Outline");
+	m_pEffect->Begin(&numPasses, 0);
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		m_pEffect->BeginPass(i);
+		for (int n = 0; n < m_dwNumMat; ++n)
+		{
+			m_pEffect->CommitChanges();
+			m_pMesh->DrawSubset(n);
+		}
+		m_pEffect->EndPass();
+	}
+	m_pEffect->End();
+
+	// --- トゥーン本体描画（後に） ---
+	m_pEffect->SetTechnique("ToonTechnique");
+	m_pEffect->Begin(&numPasses, 0);
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		m_pEffect->BeginPass(i);
+		for (int n = 0; n < m_dwNumMat; ++n)
+		{
+			m_pEffect->SetTexture("DiffuseTexture", m_pToonMap);
+
+			m_pEffect->CommitChanges();
+			m_pMesh->DrawSubset(n);
+		}
+		m_pEffect->EndPass();
+	}
+	m_pEffect->End();
+}
+//=======================================
+// モーションのセット
+//=======================================
 void CParts::SetMotion(int nMotion)
 {
 	m_pNowMotion->SetMotion(nMotion);
 	m_pNowMotion->SetKye(0);
 	m_pNowMotion->SetFrame(0);
 }
-
+//=======================================
+// 動きのセット
+//=======================================
 void CParts::SetMoveX(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 siz, int nFrame)
 {
 	X x;
@@ -519,6 +698,11 @@ CObjectMotion* CObjectMotion::creat(string FileName)
 //============================================
 bool CObjectMotion::Load(const char* aFileName)
 {
+
+	CManager* pManager = CManager::GetInstance();
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = pManager->GetRenderer()->GetDevice();
+
 	ifstream file(aFileName);  // 読み込むファイルのパスを指定
 	if (file.fail()) {
 		cerr << "ファイルを開けませんでした\n";
@@ -620,7 +804,10 @@ bool CObjectMotion::Load(const char* aFileName)
 								file >> skip;	// 一文スキップ
 								file >> str3;	// モデル名を取得
 
-								m_pParts[nCntPartsset0]->CObjectX::SetModel(aModelFile[atoi(str3.c_str())].c_str());
+								//m_pParts[nCntPartsset0]->CObjectX::SetModel(aModelFile[atoi(str3.c_str())].c_str());
+								m_pParts[nCntPartsset0]->CObjectX::LoadXModel(pDevice, aModelFile[atoi(str3.c_str())].c_str());
+								m_pParts[nCntPartsset0]->LoadEffect(pDevice, "shader/ToonShader.fx");
+
 
 								getline(file, skip);	// 一行スキップ
 							}

@@ -1,7 +1,7 @@
 //=================================
 // 
 // オブジェクト3Dクラス　object3D.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _OBJECT3D_H_

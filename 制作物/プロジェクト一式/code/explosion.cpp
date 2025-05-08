@@ -1,20 +1,14 @@
 //=================================
 // 
 // パーティクル クラス　particle.cpp
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #include "explosion.h"   // 爆発
 #include "manager.h"       // マネージャー
 
-const int CExplosion::LIFE = 1000;
 LPDIRECT3DTEXTURE9 CExplosion::m_pTextureTemp = {};
-const int CExplosion::DIVIDE = 8;   // 分割数
-const int CExplosion::TIME = 30;    // アニメーションのタイム
-const float CExplosion::SIZE_X = 10.0f;  // テクスチャサイズx
-const float CExplosion::SIZE_Z = 10.0f;  // テクスチャサイズz
 
-#if 1
 //===============================
 // コンストラクタ
 //===============================
@@ -40,10 +34,10 @@ HRESULT CExplosion::Init()
 	CObject3D::Init();
 	SetType(CObject::TYPE::EXPLOSION);
 
-	SetAnim(DIVIDE, TIME);
-	SetField(SIZE_X, SIZE_Z);
+	SetAnim(DIVIDE, TIME);   // アニメーション設定
+	SetField(SIZE_X, SIZE_Z);// テクスチャのサイズ
 
-	m_dwLifeTime = timeGetTime() + LIFE;
+	m_dwLifeTime = timeGetTime() + LIFE;  // ライフ設定
 
 	return S_OK;
 }
@@ -61,6 +55,7 @@ void CExplosion::Update()
 {
 	CObject3D::Update();
 	
+	// 一定時間で消す
 	if (timeGetTime() >= m_dwLifeTime)
 	{
 		CExplosion::m_bDeath = true;
@@ -124,4 +119,3 @@ void CExplosion::Unload()
 	}
 }
 
-#endif

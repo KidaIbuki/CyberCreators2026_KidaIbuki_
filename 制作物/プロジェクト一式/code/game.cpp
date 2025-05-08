@@ -1,7 +1,7 @@
 //=================================
 // 
 // ゲーム処理クラス　game.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "game.h"
@@ -21,32 +21,6 @@
 //======サウンド========
 #include "sound.h"       // サウンド
 
-
-const float CGame::LIFEPOS_X = 1200.0f;    // ライフ位置
-const float CGame::LIFEPOS_Y = 520.0f;    // ライフ位置
-const float CGame::UIPOS_X = 1200.0f;    // UI位置
-const float CGame::UIPOS_Y = 320.0f;    // UI位置
-const int CGame::FRAMETIME = 20;       // フレームのタイム
-
-const float CGame::PAUSEPOS_FOR = 80.0f;    // ポーズ位置を複数にする
-const float CGame::PAUSEPOS_Y = 300.0f;    // ポーズ位置
-const float CGame::PAUSESIZE_X = 200.0f;   // ポーズサイズ
-const float CGame::PAUSESIZE_Y = 50.0f;    // ポーズサイズ
-
-const float CGame::LEAVE = 810.0f;    // ポーズサイズ
-
-const float CGame::BGPOS_X_1 = 350.0f;   // ボスの位置
-const float CGame::BGPOS_Y_1 = 175.0f;	 // ボスの位置
-const float CGame::BGPOS_Z_1 = 7000.0f;	 // ボスの位置
-const float CGame::BGPOS_Z_2 = 13000.0f; // ボスの位置
-
-const float CGame::BOSSPOS_X = 200.0f;
-
-const float CGame::BLOCKPOS_X_1 = 170.0f;  // ブロックの位置
-const float CGame::BLOCKPOS_X_2 = 340.0f;  // ブロックの位置
-const float CGame::BLOCKPOS_Y_1 = 280.0f;  // ブロックの位置
-const float CGame::BLOCKPOS_Y_2 = 140.0f;  // ブロックの位置
-const float CGame::BLOCK_DIVITE = 330.0f;  // ブロックを離しておく
 
 //====================================
 // コンストラクタ
@@ -91,7 +65,7 @@ HRESULT CGame::Init()
 	CTarget* pTarget = CTarget::Create(D3DXVECTOR3(0.0f, 0.0f, 150.0f));   // レティクル
 
 
-
+	// オブジェクト保持
 	CreateSaveObject(pPlayer);
 	CreateSaveObject(pTarget);
 
@@ -157,6 +131,8 @@ void CGame::Update()
 
 	bool bPause = pManager->GetPause();
 	
+
+	// ポーズ処理
 	if (pKeyboard->GetTrigger(DIK_P) || pJoypad->GetJoypadTrigger(pJoypad->JOYKEY_START))
 	{
 		// サウンドを流す
@@ -239,6 +215,8 @@ void CGame::Update()
 
 	}
 	
+
+	//========自動生成=========================
 	CObject* pTopObject[NUM_MAX_PRIORITY];
 	CObject::GetObj(pTopObject);
 	for (int nPriority = 0; nPriority < NUM_MAX_PRIORITY; nPriority++)

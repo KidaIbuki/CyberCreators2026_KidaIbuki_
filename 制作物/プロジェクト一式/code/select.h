@@ -1,7 +1,7 @@
 //=================================
 // 
 // ポーズ クラス　pause.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _SELECT_H_

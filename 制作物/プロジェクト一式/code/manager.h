@@ -1,7 +1,7 @@
 //=================================
 // 
 // マネージャ　manager.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _MANAGER_H_

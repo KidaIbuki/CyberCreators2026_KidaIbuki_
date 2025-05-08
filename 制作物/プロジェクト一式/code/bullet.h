@@ -1,7 +1,7 @@
 ﻿//=================================
 // 
 // 弾クラス　bullet.h
-//outher kida ibuki 
+//Auther kida ibuki 
 // 
 //==================================
 #ifndef _BULLET_H_
@@ -35,16 +35,19 @@ protected:
 
 	static LPDIRECT3DTEXTURE9 m_pTextureTemp;						//テクスチャのテンプレート
 
-	static const int LIFE;				//ライフ
+	static constexpr int LIFE = 1300;
+
 private:
 	int m_nHitCnt;
 
 	static const D3DXCOLOR COL;   // 色
-	static const float RADIUS;    // 半径
-	static const float SPLIT;     // 分割
-	static const int EFFECTLIFE;  // エフェクトライフ
-	static const float BILLSIZE;  // ビルボードサイズ
-	static const float BULLETSIZE; // 弾のサイズ
+
+	static constexpr float RADIUS = 3.0f;  // 半径
+	static constexpr float SPLIT = 1.0f;  // 分割
+	static constexpr int EFFECTLIFE = 10;  // エフェクトのライフ
+	static constexpr float BILLSIZE = 3.0f;  // ビルボードサイズ
+	static constexpr float BULLETSIZE = 4.0f;  // 弾のサイズ
+
 };
 class CBulletEnemy : public CBullet
 {
@@ -62,11 +65,12 @@ public:
 
 private:
 	static const D3DXCOLOR COL;   // 色
-	static const float RADIUS;    // 半径
-	static const float SPLIT;     // 分割
-	static const int EFFECTLIFE;  // エフェクトライフ
-	static const float BILLSIZE;  // ビルボードサイズ
-	static const float BULLETSIZE; // 弾のサイズ
+
+	static constexpr float RADIUS = 5.0f;  // 半径
+	static constexpr float SPLIT = 1.0f;  // 分割
+	static constexpr int EFFECTLIFE = 10;  // エフェクトのライフ
+	static constexpr float BILLSIZE = 5.0f;  // ビルボードサイズ
+	static constexpr float BULLETSIZE = 10.0f;  // 弾のサイズ
 
 };
 

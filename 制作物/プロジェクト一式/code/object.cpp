@@ -1,7 +1,7 @@
 //=================================
 // 
 // オブジェクトクラス　object.cpp
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #include "object.h"   // オブジェクト

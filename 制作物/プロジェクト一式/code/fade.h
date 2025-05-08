@@ -1,7 +1,7 @@
 //=================================
 // 
 // フェード　fade.h
-//outher kida ibuki 
+// Auther kida ibuki 
 // 
 //==================================
 #ifndef _FADE_H_
